@@ -1,0 +1,1145 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="غُصن: زيت زيتون من مزرعة العيلة، عصرة موسم ٢٠٢٦. توصيل لكل محافظات مصر والدفع عند الاستلام.">
+<meta name="theme-color" content="#17220f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 40 40%27%3E%3Cpath d=%27M8 34C14 22 22 13 34 6%27 stroke=%27%238fa95a%27 stroke-width=%273%27 fill=%27none%27/%3E%3Cellipse cx=%2715%27 cy=%2722%27 rx=%279%27 ry=%274%27 transform=%27rotate(-50 15 22)%27 fill=%27%238fa95a%27/%3E%3Cellipse cx=%2721%27 cy=%2727%27 rx=%275%27 ry=%276.5%27 transform=%27rotate(-30 21 27)%27 fill=%27%23e8bd3d%27/%3E%3C/svg%3E">
+<title>غُصن زيت زيتون</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Readex+Pro:wght@300;400;500;600;700&display=swap">
+<style>
+/* base reset */
+html,body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+/* Layout: drenched olive-green world lit by one gold source (the oil); hero = bottle whose label is the buy box; then harvest path, shipping lookup, payment, FAQ; cart/checkout in a side sheet; #orders = owner ledger */
+:root{
+  --ground:#17220f; --ground-2:#1e2b14; --raise:#26351a; --line:#34472384; --line-solid:#3a4d27;
+  --text:#eef0dc; --text-2:#b9c19d; --text-3:#a3ad89;
+  --oil:#e8bd3d; --oil-hi:#f6d872; --oil-lo:#a9821b; --leaf:#8fa95a;
+  --label:#f3ecd0; --label-ink:#1f2a12; --label-ink-2:#566040;
+  --ok:#9cc46b; --warn:#e8bd3d; --bad:#e58b6f; --info:#8fbfd6;
+  --display:"Aref Ruqaa","Amiri","Traditional Arabic",serif;
+  --ui:"Readex Pro","Segoe UI","Noto Sans Arabic",Tahoma,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ground);color:var(--text);font-family:var(--ui);font-size:16px;line-height:1.7;direction:rtl;font-weight:400}
+::selection{background:var(--oil);color:var(--label-ink)}
+html{scrollbar-color:var(--line-solid) var(--ground)}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0;font-weight:700;line-height:1.25}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--oil-hi);text-underline-offset:4px}
+:focus-visible{outline:2px solid var(--oil-hi);outline-offset:3px;border-radius:6px}
+.num{font-variant-numeric:tabular-nums}
+.ico{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ground)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+.logo b{font-family:var(--display);font-size:2rem;line-height:1;font-weight:700;color:var(--oil)}
+.logo small{color:var(--text-3);font-size:.78rem;line-height:1.3;max-width:9em}
+.top nav{display:flex;gap:26px}
+.top nav a{color:var(--text-2);text-decoration:none;font-size:.95rem}
+.top nav a:hover{color:var(--text)}
+.top-actions{display:flex;align-items:center;gap:8px}
+.cart-btn{display:flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--line-solid);border-radius:999px;padding:7px 14px 7px 10px;font-size:.95rem;transition:border-color .2s,background .2s}
+.cart-btn:hover{border-color:var(--oil);background:var(--ground-2)}
+.cart-btn .n{min-width:24px;height:24px;border-radius:999px;background:var(--oil);color:var(--label-ink);display:grid;place-items:center;font-weight:700;font-size:.82rem;padding:0 7px}
+.cart-btn.bump .n{animation:bump .45s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes bump{40%{transform:scale(1.35)}}
+.admin-link{font-size:.85rem;color:var(--text-2);text-decoration:none;border:1px dashed var(--line-solid);border-radius:999px;padding:6px 12px}
+.admin-link:hover{color:var(--oil-hi);border-color:var(--oil)}
+@media (max-width:820px){.top nav{display:none}.logo small{display:none}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;isolation:isolate}
+/* صور المزرعة ورا الهيرو، وفوقها طبقة زيتوني غامقة عشان الكلام والإزازة يبانوا */
+.farm-bg{position:absolute;inset:0;z-index:-2;background:var(--ground)}
+.farm-bg img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.6s ease,transform 9s linear;filter:saturate(.85) contrast(1.05)}
+.farm-bg img.on{opacity:1;transform:scale(1)}
+.farm-bg::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(to left,rgba(14,22,9,.95) 0%,rgba(14,22,9,.84) 36%,rgba(14,22,9,.52) 68%,rgba(14,22,9,.66) 100%),
+  linear-gradient(to bottom,rgba(23,34,15,.25) 0%,rgba(23,34,15,0) 40%,var(--ground) 100%)}
+.farm-dots{position:absolute;z-index:1;bottom:18px;left:max(16px,env(safe-area-inset-left,0px));display:flex;gap:6px}
+.farm-dots button{width:22px;height:4px;border-radius:2px;border:0;padding:0;background:rgba(238,240,220,.3);transition:background .3s,width .3s}
+.farm-dots button[aria-current="true"]{background:var(--oil);width:34px}
+.hero h1,.hero .lede{text-shadow:0 2px 28px rgba(0,0,0,.45)}
+.hero::before{content:"";position:absolute;z-index:-1;inset:-10% -20% auto auto;width:900px;height:900px;max-width:none;background:radial-gradient(closest-side,color-mix(in srgb,var(--oil) 30%,transparent),transparent 70%);left:-160px;right:auto;top:-60px;pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,5vw,72px);align-items:center;padding-block:clamp(28px,5vw,56px) clamp(36px,6vw,72px)}
+.hero h1{font-family:var(--display);font-size:clamp(2.9rem,7.2vw,5.6rem);line-height:1.12;color:var(--text);letter-spacing:0}
+.hero h1 em{font-style:normal;color:var(--oil)}
+.hero .origin{display:inline-flex;align-items:center;gap:10px;color:var(--oil);font-size:clamp(.95rem,1.4vw,1.05rem);font-weight:500;margin-bottom:14px;text-shadow:0 2px 18px rgba(0,0,0,.5)}
+.hero .origin::before{content:"";width:28px;height:1px;background:currentColor;opacity:.7}
+.hero .lede{color:var(--text-2);font-size:clamp(1.02rem,1.6vw,1.18rem);max-width:36ch;margin-top:18px;font-weight:300}
+.season{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px 22px;color:var(--text-2);font-size:.92rem}
+.season span{display:flex;align-items:center;gap:8px}
+.season .ico{color:var(--leaf)}
+
+/* bottle */
+.bottle{position:relative;width:min(370px,86vw);aspect-ratio:400/760;max-width:100%}
+.bottle > svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.oil-level{transform:translateY(100%);transform-box:fill-box;animation:fill 2.2s cubic-bezier(.16,1,.3,1) .25s forwards}
+@keyframes fill{to{transform:translateY(0)}}
+.shine{animation:shine 6s ease-in-out infinite alternate}
+@keyframes shine{from{opacity:.55}to{opacity:.9}}
+.label{position:absolute;left:12%;right:12%;top:51.5%;bottom:6%;background:var(--label);color:var(--label-ink);border-radius:10px;padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 10px 30px -12px rgba(0,0,0,.55),inset 0 0 0 1px rgba(31,42,18,.12)}
+.label::before{content:"";position:absolute;inset:5px;border:1px solid rgba(31,42,18,.28);border-radius:7px;pointer-events:none}
+.label .l-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.label .l-brand{font-family:var(--display);font-size:1.7rem;line-height:1;color:var(--label-ink)}
+.label .l-vol{font-size:.78rem;color:var(--label-ink-2);border:1px solid rgba(31,42,18,.3);border-radius:999px;padding:1px 9px}
+.label .l-name{font-size:.88rem;color:var(--label-ink-2);line-height:1.45}
+.sizes{display:flex;flex-wrap:wrap;gap:6px}
+.sizes button{flex:1 1 calc(33.333% - 6px);min-width:0;position:relative;border:1px solid rgba(31,42,18,.35);background:transparent;color:var(--label-ink);border-radius:8px;padding:5px 2px;font-size:.82rem;font-weight:500;line-height:1.2;transition:background .15s,color .15s}
+.sizes button small{display:block;font-size:.68rem;color:var(--label-ink-2);font-weight:400}
+.sizes button[aria-checked="true"]{background:var(--label-ink);color:var(--label);border-color:var(--label-ink)}
+.sizes button[aria-checked="true"] small{color:#c9cfb0}
+.sizes .tag{position:absolute;top:-8px;inset-inline-start:6px;background:var(--oil);color:#2a2208;font-size:.6rem;font-weight:700;line-height:1;padding:3px 6px;border-radius:999px}
+.label .l-note{font-size:.76rem;line-height:1.45;color:var(--label-ink-2);margin-top:-2px}
+.label .l-note b{color:var(--label-ink);font-weight:600}
+.label .l-note:empty{display:none}
+.label .l-price{display:flex;align-items:baseline;gap:6px;margin-top:auto}
+.label .l-price b{font-size:2rem;line-height:1;font-weight:700}
+.label .l-price span{font-size:.85rem;color:var(--label-ink-2)}
+.label .l-row{display:flex;gap:8px;align-items:stretch}
+.step{display:flex;align-items:center;border:1px solid rgba(31,42,18,.35);border-radius:10px;overflow:hidden;flex:none}
+.step button{width:34px;height:40px;border:0;background:transparent;display:grid;place-items:center;color:inherit}
+.step button:hover{background:rgba(31,42,18,.08)}
+.step button:disabled{opacity:.35;cursor:not-allowed}
+.step output{min-width:26px;text-align:center;font-weight:700}
+.step input{width:44px;height:40px;border:0;border-inline:1px solid rgba(31,42,18,.2);background:rgba(255,255,255,.35);text-align:center;font:inherit;font-weight:700;color:inherit;-moz-appearance:textfield}
+.step input::-webkit-outer-spin-button,.step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.step input:focus{outline:2px solid var(--label-ink);outline-offset:-2px}
+.step .ico{width:16px;height:16px}
+.add{flex:1;border:0;border-radius:10px;background:var(--label-ink);color:var(--label);font-weight:600;font-size:.95rem;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 10px;transition:background .2s,transform .1s}
+.add:hover{background:#2e3d1c}
+.add:active{transform:scale(.98)}
+.label .l-sum{font-size:.78rem;color:var(--label-ink-2);text-align:center;min-height:1.2em}
+@media (max-width:860px){.farm-bg::after{background:linear-gradient(to bottom,rgba(14,22,9,.9) 0%,rgba(14,22,9,.74) 40%,rgba(14,22,9,.7) 70%,var(--ground) 100%)}.farm-dots{left:50%;transform:translateX(-50%)}.hero .wrap{grid-template-columns:1fr;justify-items:center;text-align:center}.hero .lede{margin-inline:auto}.season{justify-content:center}.hero::before{left:50%;transform:translateX(-50%);top:200px}}
+@media (max-width:380px){.label{left:9%;right:9%;padding:12px}.label .l-brand{font-size:1.4rem}.label .l-price b{font-size:1.7rem}.step button{width:30px}}
+
+.bottle-col{display:flex;flex-direction:column;align-items:center;gap:18px;max-width:100%}
+.h-thumbs{display:flex;gap:10px;justify-content:center}
+.h-thumb{width:78px;aspect-ratio:1;padding:0;border-radius:12px;overflow:hidden;border:1px solid var(--line-solid);background:var(--raise);cursor:zoom-in;transition:border-color .2s,transform .2s}
+.h-thumb:hover{border-color:var(--oil);transform:translateY(-2px)}
+.h-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* photo gallery */
+.gallery{border-top:1px solid var(--line)}
+.g-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px 24px}
+.g-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:auto;gap:12px;margin-top:32px}
+.g-item{position:relative;aspect-ratio:3/4;max-width:100%;border:0;padding:0;border-radius:16px;overflow:hidden;background:var(--raise);cursor:zoom-in;display:block}
+
+.g-item img,.g-item video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.g-item:hover img,.g-item:hover video{transform:scale(1.04)}
+.g-item .cap{position:absolute;inset:auto 0 0 0;padding:28px 12px 10px;background:linear-gradient(to top,rgba(10,14,6,.78),transparent);color:#f3f2e4;font-size:.85rem;text-align:start;display:flex;justify-content:space-between;gap:8px}
+.g-item .tag-v{color:var(--oil-hi)}
+.g-vid{grid-row:span 2;aspect-ratio:auto}
+@media (max-width:760px){.g-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.g-item{border-radius:12px}.g-vid{grid-row:auto;aspect-ratio:3/4}}
+.lb{position:fixed;inset:0;z-index:70;background:rgba(6,9,4,.94);display:flex;align-items:center;justify-content:center;padding:calc(56px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(64px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb img,.lb video{max-width:100%;max-height:100%;border-radius:12px;object-fit:contain}
+.lb-btn{position:absolute;width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,242,228,.3);background:rgba(23,34,15,.7);color:#f3f2e4;display:grid;place-items:center}
+.lb-btn:hover{border-color:var(--oil)}
+.lb-close{top:calc(10px + env(safe-area-inset-top,0px));left:calc(12px + env(safe-area-inset-left,0px))}
+.lb-prev{right:calc(12px + env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%)}
+.lb-next{left:calc(12px + env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%)}
+.lb-cap{position:absolute;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#d9dcc4;font-size:.9rem}
+@media (max-width:600px){.lb-prev,.lb-next{top:auto;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:none}.lb-cap{bottom:calc(70px + env(safe-area-inset-bottom,0px))}}
+
+/* sections */
+section{padding-block:clamp(56px,8vw,96px)}
+.sec-h{font-family:var(--display);font-size:clamp(2rem,4.4vw,3rem);color:var(--text);margin-bottom:10px}
+.sec-p{color:var(--text-2);max-width:56ch;font-weight:300}
+
+/* harvest path: real sequence */
+.path{border-top:1px solid var(--line)}
+.path ol{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:relative}
+.path ol::before{content:"";position:absolute;top:21px;right:22px;left:22px;height:1px;background:linear-gradient(to left,var(--leaf),var(--oil))}
+.path li{position:relative;padding-inline-end:20px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.path .dot{width:44px;height:44px;border-radius:50%;background:var(--ground);border:1px solid var(--line-solid);display:grid;place-items:center;color:var(--oil);position:relative;margin-bottom:10px}
+.path li:last-child .dot{background:var(--oil);color:var(--label-ink);border-color:var(--oil)}
+.path h3{font-size:1.1rem;font-weight:600}
+.path p{color:var(--text-2);font-size:.93rem;font-weight:300}
+.path time{color:var(--text-3);font-size:.82rem}
+@media (max-width:760px){.path ol{grid-template-columns:1fr;gap:26px}.path ol::before{top:22px;bottom:22px;right:21px;left:auto;width:1px;height:auto;background:linear-gradient(to bottom,var(--leaf),var(--oil))}.path li{display:grid;grid-template-columns:44px 1fr;column-gap:16px;padding:0}.path .dot{grid-row:span 3;margin:0}}
+
+/* uses band: oil-coloured */
+.uses{background:var(--oil);color:var(--label-ink)}
+.uses .sec-h{color:var(--label-ink)}
+.uses .sec-p{color:#3d3a16}
+.u-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:8px 32px}
+.u-head .sec-p{max-width:44ch}
+.u-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:32px}
+.u-card{background:rgba(255,250,228,.42);border-radius:18px;padding:14px 14px 18px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.u-art{aspect-ratio:4/3;max-width:100%;border-radius:12px;background:rgba(31,42,18,.07);display:grid;place-items:center;margin-bottom:10px;overflow:hidden}
+.u-art svg{width:88%;height:auto;display:block}
+.u-card h3{font-size:1.05rem;font-weight:600;color:var(--label-ink)}
+.u-qty{font-size:2rem;font-weight:700;line-height:1.15;color:var(--label-ink)}
+.u-qty small{font-size:.95rem;font-weight:500;margin-inline-start:4px}
+.u-note{font-size:.86rem;color:#423d14}
+@media (max-width:860px){.u-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.u-qty{font-size:1.6rem}}
+
+/* shipping + payment */
+.deliver .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px)}
+.ship-tool{margin-top:26px;background:var(--ground-2);border:1px solid var(--line-solid);border-radius:16px;padding:20px}
+.ship-tool label{display:block;font-size:.88rem;color:var(--text-2);margin-bottom:6px}
+.ship-out{display:flex;justify-content:space-between;gap:12px;margin-top:16px;padding-top:16px;border-top:1px dashed var(--line-solid)}
+.ship-out div{display:flex;flex-direction:column}
+.ship-out small{color:var(--text-3);font-size:.8rem}
+.ship-out b{font-size:1.35rem;font-weight:600}
+.pay-list{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column}
+.pay-list li{display:grid;grid-template-columns:40px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.pay-list li:first-child{border-top:1px solid var(--line)}
+.pay-list .pi{width:40px;height:40px;border-radius:10px;background:var(--raise);display:grid;place-items:center;color:var(--oil)}
+.pay-list h3{font-size:1rem;font-weight:600}
+.pay-list p{color:var(--text-2);font-size:.9rem;font-weight:300}
+.pay-list .soon{opacity:.6}
+.tag{font-size:.72rem;border:1px solid var(--line-solid);color:var(--text-2);border-radius:999px;padding:0 8px;margin-inline-start:6px;font-weight:400;vertical-align:middle}
+@media (max-width:820px){.deliver .wrap{grid-template-columns:1fr}}
+
+/* faq */
+.faq .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:40px}
+details{border-bottom:1px solid var(--line)}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:500;display:flex;justify-content:space-between;align-items:center;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary .ico{transition:transform .25s;color:var(--oil)}
+details[open] summary .ico{transform:rotate(45deg)}
+details p{color:var(--text-2);padding-bottom:18px;font-weight:300;max-width:60ch}
+@media (max-width:820px){.faq .wrap{grid-template-columns:1fr;gap:16px}}
+
+/* closing */
+.close{text-align:center;border-top:1px solid var(--line);position:relative;isolation:isolate;overflow:hidden}
+.close .farm-bg::after{background:linear-gradient(to bottom,var(--ground) 0%,rgba(14,22,9,.72) 35%,rgba(14,22,9,.72) 65%,var(--ground) 100%)}
+.close .farm-bg img{opacity:1;transform:none}
+.close .sec-h{margin-bottom:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:13px 24px;font-weight:600;border:0;text-decoration:none;transition:background .2s,transform .1s,border-color .2s}
+.btn:active{transform:scale(.98)}
+.btn-oil{background:var(--oil);color:var(--label-ink)}
+.btn-oil:hover{background:var(--oil-hi)}
+.btn-line{background:transparent;color:var(--text);border:1px solid var(--line-solid)}
+.btn-line:hover{border-color:var(--oil)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--text-3);font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center}
+footer .logo b{font-size:1.5rem}
+
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(5,8,3,.6);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;top:0;bottom:0;left:0;width:min(440px,100%);background:var(--ground-2);border-inline-start:1px solid var(--line-solid);z-index:50;display:flex;flex-direction:column;transform:translateX(-104%);transition:transform .32s cubic-bezier(.16,1,.3,1);
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px)}
+.sheet.on{transform:none;box-shadow:20px 0 60px -20px rgba(0,0,0,.6)}
+.s-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line)}
+.s-head h2{font-size:1.15rem;font-weight:600}
+.s-steps{display:flex;gap:6px;font-size:.78rem;color:var(--text-3);margin-top:2px}
+.s-steps span.on{color:var(--oil)}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line-solid);background:transparent;display:grid;place-items:center;color:var(--text)}
+.icon-btn:hover{border-color:var(--oil)}
+.s-body{flex:1;overflow:auto;padding:18px 20px;display:flex;flex-direction:column;gap:18px;scrollbar-width:thin}
+.s-foot{padding:16px 20px;border-top:1px solid var(--line);display:grid;gap:10px}
+.s-foot .btn{width:100%}
+.empty{text-align:center;color:var(--text-2);padding:48px 8px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.empty svg{width:56px;height:auto;opacity:.8}
+.line-item{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:center}
+.mini{width:52px;height:64px;border-radius:10px;background:var(--raise);display:grid;place-items:center}
+.mini{overflow:hidden}
+.mini img{width:100%;height:100%;object-fit:cover;display:block}
+.line-item .t{font-weight:500}
+.line-item .m{color:var(--text-3);font-size:.85rem}
+.line-item .step{border-color:var(--line-solid)}
+.line-item .step button:hover{background:var(--raise)}
+.sums{display:grid;gap:8px;font-size:.95rem;border-top:1px dashed var(--line-solid);padding-top:14px}
+.sums div{display:flex;justify-content:space-between;gap:12px}
+.sums .muted{color:var(--text-2)}
+.sums .grand{font-weight:700;font-size:1.15rem;padding-top:6px}
+form{display:grid;gap:14px}
+.f{display:grid;gap:6px}
+.f label{font-size:.88rem;color:var(--text-2)}
+.f input,.f select,.f textarea{width:100%;background:var(--ground);border:1px solid var(--line-solid);border-radius:10px;padding:11px 12px;font-size:1rem;caret-color:var(--oil);transition:border-color .2s}
+.f input::placeholder,.f textarea::placeholder{color:var(--text-3)}
+.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--oil)}
+.f [aria-invalid="true"]{border-color:var(--bad)}
+.f .err{color:var(--bad);font-size:.82rem}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b9c19d' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;padding-left:36px!important}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:8px}
+legend{font-size:.88rem;color:var(--text-2);margin-bottom:6px;padding:0}
+.opt{display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:start;border:1px solid var(--line-solid);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .2s,background .2s}
+.opt:has(input:checked){border-color:var(--oil);background:color-mix(in srgb,var(--oil) 8%,transparent)}
+.opt:has(input:disabled){opacity:.5;cursor:not-allowed}
+.opt input{accent-color:var(--oil);margin-top:5px;width:16px;height:16px}
+.opt b{font-weight:500;display:block}
+.opt small{color:var(--text-3);font-size:.82rem}
+.form-err{background:color-mix(in srgb,var(--bad) 14%,transparent);border:1px solid color-mix(in srgb,var(--bad) 50%,transparent);color:var(--text);border-radius:10px;padding:10px 12px;font-size:.9rem}
+
+/* confirmation stamp */
+.done{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding-top:12px}
+.stamp{width:170px;height:170px;border-radius:50%;border:3px double var(--oil);color:var(--oil);display:grid;place-items:center;transform:rotate(-8deg);animation:stamp .5s cubic-bezier(.2,1.4,.4,1) both}
+.stamp div{display:flex;flex-direction:column;align-items:center;line-height:1.2}
+.stamp small{font-size:.8rem}
+.stamp b{font-size:1.6rem;font-weight:700;letter-spacing:.02em;direction:ltr}
+@keyframes stamp{from{transform:scale(1.8) rotate(-8deg);opacity:0}to{transform:scale(1) rotate(-8deg);opacity:1}}
+.done h3{font-family:var(--display);font-size:1.9rem;color:var(--text)}
+.done p{color:var(--text-2);max-width:34ch}
+.recap{width:100%;text-align:start;background:var(--ground);border:1px solid var(--line-solid);border-radius:12px;padding:14px 16px;display:grid;gap:6px;font-size:.92rem}
+.recap div{display:flex;justify-content:space-between;gap:12px}
+.recap span:first-child{color:var(--text-3)}
+.transfer{width:100%;text-align:start;border:1px dashed var(--oil);border-radius:12px;padding:14px 16px;font-size:.92rem;color:var(--text-2)}
+.transfer b{color:var(--text);direction:ltr;display:inline-block}
+
+/* owner ledger */
+.ledger{display:none;padding-block:28px 64px}
+body.mode-orders .store{display:none}
+body.mode-orders .ledger{display:block}
+.led-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:22px}
+.led-head h1{font-family:var(--display);font-size:clamp(2rem,4vw,2.8rem)}
+.led-head p{color:var(--text-2)}
+.led-stats{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line-solid);border-radius:14px;overflow:hidden;margin-bottom:18px}
+.led-stats div{flex:1 1 140px;padding:14px 16px;border-inline-start:1px solid var(--line-solid)}
+.led-stats div:first-child{border-inline-start:0}
+.led-stats small{display:block;color:var(--text-3);font-size:.8rem}
+.led-stats b{font-size:1.4rem;font-weight:600}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{border:1px solid var(--line-solid);background:transparent;border-radius:999px;padding:6px 14px;font-size:.88rem;color:var(--text-2);display:flex;gap:6px;align-items:center}
+.chip[aria-pressed="true"]{background:var(--text);color:var(--ground);border-color:var(--text)}
+.chip .c{font-variant-numeric:tabular-nums;opacity:.7}
+.orders{display:grid;gap:10px}
+.order{display:grid;grid-template-columns:auto minmax(0,1.4fr) minmax(0,1.6fr) auto auto;gap:18px;align-items:center;background:var(--ground-2);border:1px solid var(--line-solid);border-radius:14px;padding:14px 18px}
+.order .no{font-weight:700;direction:ltr;color:var(--oil);font-size:.95rem}
+.order .when{color:var(--text-3);font-size:.8rem}
+.order .who b{font-weight:600}
+.order .who span{display:block;color:var(--text-2);font-size:.9rem;direction:ltr;text-align:right}
+.order .addr{color:var(--text-2);font-size:.88rem;min-width:0}
+.order .addr b{color:var(--text);font-weight:500}
+.order .amt{text-align:left}
+.order .amt b{font-weight:700}
+.order .amt small{display:block;color:var(--text-3);font-size:.78rem}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;border-radius:999px;padding:3px 10px 3px 12px;border:1px solid currentColor}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.s-new{color:var(--warn)}.s-confirmed{color:var(--info)}.s-shipped{color:var(--leaf)}.s-delivered{color:var(--ok)}.s-cancelled{color:var(--bad)}
+.order select{background:var(--ground);border:1px solid var(--line-solid);border-radius:8px;padding:6px 10px;font-size:.85rem}
+.order-status{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+@media (max-width:900px){.order{grid-template-columns:1fr 1fr;row-gap:10px}.order .addr{grid-column:1/-1}.order .amt{text-align:right}}
+.led-empty{border:1px dashed var(--line-solid);border-radius:14px;padding:48px 20px;text-align:center;color:var(--text-2)}
+.led-empty b{display:block;color:var(--text);font-size:1.1rem;margin-bottom:6px;font-weight:500}
+
+.toast{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom,0px));left:50%;transform:translate(-50%,16px);background:var(--label);color:var(--label-ink);padding:10px 18px;border-radius:999px;font-weight:500;font-size:.92rem;opacity:0;transition:.25s;z-index:60;pointer-events:none;white-space:nowrap;box-shadow:0 10px 30px -10px rgba(0,0,0,.6)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.oil-level{transform:none}}
+
+/* ===================== DEPTH =====================
+   ضوء واحد (الزيت) + ٣ مستويات ظل + ملمس حبيبي خفيف + بارالاكس */
+:root{
+  --deep:#0f170a;
+  --sh-1:0 1px 0 rgba(255,255,255,.05) inset,0 2px 6px -2px rgba(0,0,0,.45),0 8px 18px -10px rgba(0,0,0,.55);
+  --sh-2:0 1px 0 rgba(255,255,255,.06) inset,0 10px 24px -10px rgba(0,0,0,.6),0 28px 60px -28px rgba(0,0,0,.7);
+  --sh-3:0 1px 0 rgba(255,255,255,.07) inset,0 24px 50px -18px rgba(0,0,0,.65),0 60px 120px -40px rgba(0,0,0,.8);
+  --sh-paper:0 1px 0 rgba(255,255,255,.7) inset,0 -1px 0 rgba(31,42,18,.12) inset,0 10px 22px -12px rgba(60,48,8,.55),0 26px 50px -30px rgba(40,32,4,.6);
+}
+/* grain: ملمس فوق كل الصفحة عشان الأسطح متبقاش مسطحة */
+body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* hero: طبقات */
+.hero{min-height:min(860px,100svh)}
+.hero .wrap{grid-template-columns:minmax(0,600px) auto;justify-content:space-between;max-width:1180px}
+.farm-bg{transform:translate3d(0,var(--py,0px),0) scale(1.06);will-change:transform}
+.hero::before{opacity:1;animation:breathe 7s ease-in-out infinite alternate}
+@keyframes breathe{from{opacity:.75}to{opacity:1}}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:160px;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--ground))}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn-lg{padding:15px 28px;font-size:1.05rem}
+.btn-oil{box-shadow:0 1px 0 rgba(255,255,255,.45) inset,0 -2px 0 rgba(120,90,10,.35) inset,0 10px 24px -8px color-mix(in srgb,var(--oil) 70%,transparent),0 2px 4px rgba(0,0,0,.3)}
+.btn-oil:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 -2px 0 rgba(120,90,10,.35) inset,0 18px 34px -10px color-mix(in srgb,var(--oil) 80%,transparent),0 3px 6px rgba(0,0,0,.3)}
+.btn-ghost{background:rgba(238,240,220,.06);color:var(--text);border:1px solid rgba(238,240,220,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:rgba(238,240,220,.12);border-color:var(--oil)}
+.season{gap:8px}
+.season span{background:rgba(15,23,10,.55);border:1px solid rgba(238,240,220,.12);border-radius:999px;padding:6px 12px 6px 14px;box-shadow:var(--sh-1);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.farm-dots{left:auto;right:max(16px,calc((100% - 1180px)/2 + 16px));bottom:24px}
+
+/* الإزازة: بتميل مع الماوس، ولها ضل على الأرض وانعكاس */
+.bottle-col{perspective:1100px}
+.bottle{transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--by,0px));transition:transform .5s cubic-bezier(.16,1,.3,1);filter:drop-shadow(0 40px 40px rgba(0,0,0,.55)) drop-shadow(0 12px 14px rgba(0,0,0,.35))}
+.bottle::after{content:"";position:absolute;left:8%;right:8%;bottom:-34px;height:46px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);filter:blur(6px);transform:translateZ(-40px);z-index:-1}
+.label{transform:translateZ(24px);box-shadow:var(--sh-paper)}
+.label::after{content:"";position:absolute;inset:0;border-radius:10px;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.35) 45%,rgba(255,255,255,0) 60%);background-size:250% 100%;background-position:var(--gx,100%) 0;mix-blend-mode:soft-light}
+.h-thumb{box-shadow:var(--sh-2)}
+.h-thumb:hover{transform:translateY(-4px) rotate(-2deg)}
+
+/* أوراق زيتون طايرة على مستويات مختلفة */
+.leaves{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.lf{position:absolute;width:46px;height:46px;opacity:.9;transform:translate3d(0,var(--ly,0px),0);will-change:transform}
+.lf use{animation:drift 9s ease-in-out infinite alternate}
+.l1{top:14%;left:44%;width:34px;height:34px;filter:blur(1px);opacity:.55}
+.l2{top:70%;left:6%;width:26px;height:26px;opacity:.4;filter:blur(2px)}
+.l3{top:22%;right:6%;width:64px;height:64px;filter:blur(3px);opacity:.5}
+.l4{top:58%;left:40%;width:30px;height:30px;opacity:.6}
+.l5{bottom:8%;right:38%;width:90px;height:90px;filter:blur(6px);opacity:.35}
+.l6{top:8%;left:12%;width:22px;height:22px;opacity:.35}
+.l2 use,.l5 use{animation-duration:12s;animation-delay:-3s}
+.l3 use,.l6 use{animation-duration:10s;animation-delay:-6s}
+@keyframes drift{from{transform:rotate(-12deg) translate(0,0)}to{transform:rotate(14deg) translate(10px,-14px)}}
+
+/* السكاشن: كل سكشن بقى له مستوى وضوء */
+main.store > section{position:relative;isolation:isolate}
+.gallery{background:radial-gradient(1100px 500px at 85% 0%,rgba(232,189,61,.08),transparent 60%),var(--deep);border-top:0;box-shadow:0 -1px 0 rgba(255,255,255,.04) inset}
+.g-grid{gap:16px}
+.g-item{box-shadow:var(--sh-2);transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s}
+.g-item:hover{transform:translateY(-8px) scale(1.01);box-shadow:var(--sh-3)}
+@media (min-width:761px){.g-item:nth-child(2),.g-item:nth-child(4){margin-top:-28px}.g-grid{padding-top:28px}}
+.path{background:radial-gradient(900px 420px at 10% 100%,rgba(143,169,90,.10),transparent 60%),var(--ground);border-top:0}
+.path .dot{box-shadow:var(--sh-2),0 0 0 6px rgba(15,23,10,.6)}
+.path li:last-child .dot{box-shadow:0 0 0 6px rgba(15,23,10,.6),0 0 30px -2px color-mix(in srgb,var(--oil) 70%,transparent)}
+.path ol::before{height:2px;box-shadow:0 0 12px color-mix(in srgb,var(--oil) 50%,transparent)}
+.uses{background:radial-gradient(800px 380px at 80% 10%,#f6d872,transparent 65%),radial-gradient(700px 360px at 10% 100%,#c99a22,transparent 70%),var(--oil);box-shadow:0 30px 60px -30px rgba(0,0,0,.6) inset,0 -30px 60px -40px rgba(0,0,0,.45) inset}
+.u-card{background:linear-gradient(180deg,#fbf3d2,#f1e4b4);box-shadow:var(--sh-paper);transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
+.u-card:hover{transform:translateY(-6px) rotate(-.4deg)}
+.u-art{background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.7),rgba(31,42,18,.06) 70%);box-shadow:0 2px 6px -2px rgba(60,48,8,.3) inset}
+.u-art svg{filter:drop-shadow(0 8px 8px rgba(60,48,8,.28))}
+.deliver{background:linear-gradient(180deg,var(--deep),var(--ground))}
+.ship-tool{background:linear-gradient(180deg,#26351a,#1c2814);box-shadow:var(--sh-2);border-color:rgba(238,240,220,.08)}
+.pay-list li{border-color:rgba(238,240,220,.07)}
+.pay-list .pi{box-shadow:var(--sh-1);background:linear-gradient(180deg,#2e3f20,#223018)}
+.faq{background:var(--ground);padding-block:clamp(48px,6vw,80px)}
+details{background:linear-gradient(180deg,rgba(38,53,26,.55),rgba(30,43,20,.35));border:1px solid rgba(238,240,220,.06);border-radius:14px;padding-inline:18px;margin-bottom:10px;box-shadow:var(--sh-1);transition:box-shadow .3s,background .3s}
+details:first-of-type{border-top:1px solid rgba(238,240,220,.06)}
+details[open]{box-shadow:var(--sh-2);background:linear-gradient(180deg,rgba(46,63,32,.7),rgba(30,43,20,.45))}
+.close{border-top:0}
+.close .btn{position:relative}
+.top{box-shadow:0 10px 30px -18px rgba(0,0,0,.8)}
+.cart-btn{box-shadow:var(--sh-1);background:rgba(15,23,10,.4)}
+.sheet{box-shadow:30px 0 80px -20px rgba(0,0,0,.8)}
+footer{background:var(--deep);border-top:1px solid rgba(238,240,220,.05)}
+
+/* شريط طلب ثابت تحت على الموبايل لما الإزازة تختفي */
+.buybar{position:fixed;z-index:30;left:0;right:0;bottom:0;padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));
+  background:linear-gradient(180deg,rgba(23,34,15,.86),rgba(15,23,10,.96));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(238,240,220,.1);box-shadow:0 -14px 40px -14px rgba(0,0,0,.8);
+  display:flex;align-items:center;gap:12px;transform:translateY(110%);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.buybar.on{transform:none}
+.buybar .bb-t{flex:1;min-width:0;line-height:1.3}
+.buybar .bb-t b{display:block;font-weight:600}
+.buybar .bb-t small{color:var(--text-2)}
+.buybar .btn{padding:11px 18px}
+@media (min-width:861px){.buybar{display:none}}
+
+@media (max-width:860px){
+  .hero{min-height:0}
+  .hero .wrap{grid-template-columns:1fr;max-width:none}
+  .hero-cta{justify-content:center}
+  .farm-dots{right:auto;left:50%;transform:translateX(-50%);bottom:14px}
+  .g-item:hover{transform:none}
+  .l3,.l5{display:none}
+}
+@media (prefers-reduced-motion:reduce){.farm-bg,.lf,.bottle{transform:none!important}.lf use,.hero::before{animation:none}}
+
+/* ============ 3D bottle ============ */
+.bottle-col{perspective:none}
+.bottle{width:min(420px,86vw);aspect-ratio:380/560;transform:none!important;filter:none;cursor:grab;touch-action:pan-y;transition:none}
+.bottle:active{cursor:grabbing}
+.bottle::after{display:none}
+#bottle3d{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .8s ease}
+.bottle.is3d #bottle3d{opacity:1}
+.bottle.is3d .bottle-svg{display:none}
+.bottle-svg{position:absolute;inset:0;width:100%;height:100%}
+.drag-hint{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:.78rem;color:var(--text-2);background:rgba(15,23,10,.6);border:1px solid rgba(238,240,220,.12);border-radius:999px;padding:4px 12px;pointer-events:none;transition:opacity .6s}
+.drag-hint .ico{width:14px;height:14px}
+.drag-hint.gone{opacity:0}
+.label{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:min(360px,92vw);margin-top:-18px;transform:none;z-index:2}
+.label::after{display:none}
+@media (max-width:380px){.label{left:auto;right:auto}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gOil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6d872"/><stop offset=".45" stop-color="#e2b534"/><stop offset="1" stop-color="#8f6d12"/>
+    </linearGradient>
+    <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".22"/><stop offset=".18" stop-color="#ffffff" stop-opacity=".04"/><stop offset=".82" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#ffffff" stop-opacity=".14"/>
+    </linearGradient>
+    <radialGradient id="gGlow" cx=".5" cy=".62" r=".55">
+      <stop offset="0" stop-color="#f6d872" stop-opacity=".55"/><stop offset="1" stop-color="#f6d872" stop-opacity="0"/>
+    </radialGradient>
+    <symbol id="sMini" viewBox="0 0 40 80">
+      <rect x="16" y="2" width="8" height="8" rx="1.5" fill="#566b2f"/>
+      <path d="M17 10h6v12c0 4 11 7 11 15v36a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V37c0-8 11-11 11-15z" fill="url(#gOil)"/>
+      <rect x="10" y="46" width="20" height="20" rx="2" fill="#f3ecd0"/>
+    </symbol>
+    <symbol id="sLeaf" viewBox="0 0 40 40">
+      <path d="M8 34C14 22 22 13 34 6" stroke="#8fa95a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="15" cy="22" rx="9" ry="3.6" transform="rotate(-50 15 22)" fill="#8fa95a"/>
+      <ellipse cx="25" cy="13" rx="9" ry="3.6" transform="rotate(-25 25 13)" fill="#6d8740"/>
+      <ellipse cx="21" cy="27" rx="4.5" ry="6" transform="rotate(-30 21 27)" fill="#e8bd3d"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" id="logoLink"><svg width="34" height="34" aria-hidden="true"><use href="#sLeaf"/></svg><b>غُصن</b><small>زيت زيتون من مزرعتنا</small></a>
+    <nav aria-label="أقسام الستور">
+      <a href="#gallery">صور المزرعة</a>
+      <a href="#harvest">من الشجرة</a>
+      <a href="#delivery">الشحن والدفع</a>
+      <a href="#faq">أسئلة</a>
+    </nav>
+    <div class="top-actions">
+      <button class="cart-btn" id="cartBtn" type="button" aria-label="السلة">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>
+        <span>السلة</span><span class="n num" id="cartN">٠</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="store" id="top">
+  <div class="hero">
+    <div class="farm-bg" id="farmBg" aria-hidden="true">
+      <img src="hero-tree.jpg" alt="" class="on" fetchpriority="high">
+      <img src="hero-hand.jpg" alt="" loading="lazy">
+      <img src="hero-crates.jpg" alt="" loading="lazy">
+    </div>
+    <div class="farm-dots" id="farmDots" role="group" aria-label="صور المزرعة"></div>
+    <div class="leaves" aria-hidden="true">
+      <svg class="lf l1" data-depth="0.55"><use href="#sLeaf"/></svg>
+      <svg class="lf l2" data-depth="0.25"><use href="#sLeaf"/></svg>
+      <svg class="lf l3" data-depth="0.8"><use href="#sLeaf"/></svg>
+      <svg class="lf l4" data-depth="0.35"><use href="#sLeaf"/></svg>
+      <svg class="lf l5" data-depth="0.95"><use href="#sLeaf"/></svg>
+      <svg class="lf l6" data-depth="0.15"><use href="#sLeaf"/></svg>
+    </div>
+    <div class="wrap">
+      <div>
+        <p class="origin">من شجرنا في العامرية، حصاد أكتوبر ٢٠٢٦</p>
+        <h1>زيت زيتون<br>من <em>شجرنا</em> لبيتك</h1>
+        <p class="lede">بنقطف الزيتون من مزرعة العيلة ونعصره في نفس الموسم. بيوصلك لحد باب البيت في أي محافظة.</p>
+        <div class="hero-cta">
+          <a class="btn btn-oil btn-lg" href="#bottle" id="ctaOrder">اختار حجمك واطلب</a>
+          <a class="btn btn-ghost" href="#gallery">شوف المزرعة</a>
+        </div>
+        <div class="season">
+          <span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c0-3.5 2.5-6 6-6 0 3.5-2.5 6-6 6z"/><path d="M12 13c0-3-2-5.5-5.5-5.5 0 3 2 5.5 5.5 5.5z"/></svg>عصرة موسم ٢٠٢٦</span>
+          <span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>شحن لكل مصر</span>
+          <span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>ادفع عند الاستلام</span>
+        </div>
+      </div>
+
+      <div class="bottle-col">
+      <div class="bottle" id="bottle">
+        <canvas id="bottle3d" role="img" aria-label="إزازة زيت زيتون غُصن ثلاثية الأبعاد، اسحب عشان تلفها"></canvas>
+        <span class="drag-hint" id="dragHint" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg>اسحب عشان تلف الإزازة</span>
+        <svg class="bottle-svg" viewBox="0 0 400 760" role="img" aria-label="زجاجة زيت زيتون لتر">
+          <defs><clipPath id="cBody"><path d="M180 58h40v142c0 40 140 72 140 152v358a30 30 0 0 1-30 30H70a30 30 0 0 1-30-30V352c0-80 140-112 140-152z"/></clipPath></defs>
+          <ellipse cx="200" cy="520" rx="260" ry="300" fill="url(#gGlow)" class="shine"/>
+          <rect x="166" y="2" width="68" height="44" rx="8" fill="#3e5024"/>
+          <rect x="160" y="40" width="80" height="20" rx="6" fill="#2b3a18"/>
+          <path d="M180 58h40v142c0 40 140 72 140 152v358a30 30 0 0 1-30 30H70a30 30 0 0 1-30-30V352c0-80 140-112 140-152z" fill="#1e2b14" fill-opacity=".55"/>
+          <g clip-path="url(#cBody)">
+            <g class="oil-level"><rect x="0" y="250" width="400" height="520" fill="url(#gOil)"/><path d="M0 252 Q100 242 200 252 T400 252 V262 H0z" fill="#f9e39a" opacity=".7"/></g>
+          </g>
+          <path d="M180 58h40v142c0 40 140 72 140 152v358a30 30 0 0 1-30 30H70a30 30 0 0 1-30-30V352c0-80 140-112 140-152z" fill="url(#gGlass)" stroke="#d8c98a" stroke-opacity=".45" stroke-width="2"/>
+          <path d="M66 380 C62 470 62 600 70 690" stroke="#fff" stroke-opacity=".35" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <path d="M192 70 v120" stroke="#fff" stroke-opacity=".25" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+        <div class="label">
+          <div class="l-top"><span class="l-brand">غُصن</span><span class="l-vol" id="lVol">١ لتر</span></div>
+          <p class="l-name">زيت زيتون إكسترا فيرجن، عصرة ٢٠٢٦</p>
+          <div class="sizes" id="sizes" role="radiogroup" aria-label="اختار الحجم"></div>
+          <div class="l-price"><b class="num" id="lPrice">٤٤٠</b><span>جنيه</span></div>
+          <p class="l-note num" id="lNote" aria-live="polite"></p>
+          <div class="l-row">
+            <div class="step" role="group" aria-label="عدد الزجاجات">
+              <button type="button" id="hPlus" aria-label="زوّد زجاجة"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+              <output id="hQty" class="num" aria-live="polite">١</output>
+              <input id="hLit" class="num" type="number" inputmode="numeric" min="1" max="60" aria-label="عدد اللترات" hidden>
+              <button type="button" id="hMinus" aria-label="قلّل زجاجة"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
+            </div>
+            <button class="add" type="button" id="hAdd">أضف للسلة</button>
+          </div>
+          <p class="l-sum num" id="hSum">إزازة واحدة، ٤٤٠ جنيه</p>
+        </div>
+      <div class="h-thumbs" role="group" aria-label="صور المنتج">
+        <button type="button" class="h-thumb" data-i="0"><img src="bottle-palm.jpg" alt="إزازة الزيت قدام النخلة"></button>
+        <button type="button" class="h-thumb" data-i="1"><img src="bottle-yard.jpg" alt="إزازة الزيت في المزرعة"></button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="gallery" id="gallery">
+    <div class="wrap">
+      <div class="g-head">
+        <div><h2 class="sec-h">صور من المزرعة</h2><p class="sec-p">الزيت والشجر والقطف من الموسم ده. دوس على أي صورة تكبرها.</p></div>
+      </div>
+      <div class="g-grid" id="gGrid">
+        <button type="button" class="g-item" data-i="0"><img src="bottle-palm.jpg" alt="إزازة الزيت قدام النخلة" loading="lazy"><span class="cap"><span>من الجنينة</span></span></button>
+        <button type="button" class="g-item g-vid" data-i="1"><video id="harvestVid" src="harvest.mp4" poster="harvest-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="إيد بتقطف حبات زيتون من على الشجرة"></video><span class="cap"><span>القطف بالإيد</span><span class="tag-v">فيديو</span></span></button>
+        <button type="button" class="g-item" data-i="2"><img src="bottle-yard.jpg" alt="إزازة الزيت في المزرعة" loading="lazy"></button>
+        <button type="button" class="g-item g-vid" data-i="3" data-full="harvest2-full.mp4"><video src="harvest2.mp4" poster="harvest2-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="عملية قطف الزيتون في المزرعة"></video><span class="cap"><span>عملية القطف</span><span class="tag-v">فيديو كامل</span></span></button>
+        <button type="button" class="g-item" data-i="4"><img src="tree.jpg" alt="شجرة زيتون في المزرعة والحبات عليها" loading="lazy"><span class="cap"><span>شجر المزرعة</span></span></button>
+        <button type="button" class="g-item" data-i="5"><img src="crates.jpg" alt="صناديق مليانة زيتون متقطف" loading="lazy"><span class="cap"><span>محصول الموسم</span></span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="path" id="harvest">
+    <div class="wrap">
+      <h2 class="sec-h">من الشجرة للزجاجة</h2>
+      <p class="sec-p">الزيت ده ماعداش على تاجر ولا مخزن. ده الطريق اللي بيمشيه لحد ما يوصلك.</p>
+      <ol>
+        <li><div class="dot"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c0-3.5 2.5-6 6-6 0 3.5-2.5 6-6 6z"/><path d="M12 13c0-3-2-5.5-5.5-5.5 0 3 2 5.5 5.5 5.5z"/></svg></div><time>أكتوبر</time><h3>القطف</h3><p>بنقطف الزيتون بإيدينا من شجر المزرعة.</p></li>
+        <li><div class="dot"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></div><time>نفس الموسم</time><h3>العصر</h3><p>الزيتون بيتعصر بعد القطف بوقت قصير.</p></li>
+        <li><div class="dot"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3h4v4c0 1.5 4 2.5 4 6v6a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-6c0-3.5 4-4.5 4-6z"/></svg></div><time>بعد العصر</time><h3>التعبئة</h3><p>بنعبي الزيت في إزازة لتر ونقفلها.</p></li>
+        <li><div class="dot"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg></div><time>٢ – ٥ أيام</time><h3>بيتك</h3><p>المندوب بيسلمك الزجاجة لحد الباب.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="uses">
+    <div class="wrap">
+      <div class="u-head">
+        <h2 class="sec-h">لتر بيكفي إيه؟</h2>
+        <p class="sec-p">اللتر فيه حوالي ٦٦ معلقة كبيرة. الأرقام دي تقريبية وبتفرق من بيت للتاني.</p>
+      </div>
+      <div class="u-grid">
+        <article class="u-card"><div class="u-art"><svg viewBox="0 0 160 120" aria-hidden="true"><path d="M80 18c-3 6-5 9-5 12a5 5 0 0 0 10 0c0-3-2-6-5-12z" fill="#e8bd3d" stroke="#1f2a12" stroke-width="1.5"/><ellipse cx="80" cy="88" rx="64" ry="18" fill="#f8f2dc" stroke="#1f2a12" stroke-width="2"/><ellipse cx="80" cy="85" rx="48" ry="12" fill="#e9dfbd"/><path d="M36 85Q80 44 124 85Z" fill="#8a5a2b"/><g fill="#6b421d"><ellipse cx="62" cy="76" rx="5" ry="3"/><ellipse cx="76" cy="70" rx="5" ry="3" transform="rotate(-20 76 70)"/><ellipse cx="96" cy="76" rx="5" ry="3" transform="rotate(15 96 76)"/><ellipse cx="86" cy="80" rx="5" ry="3"/><ellipse cx="70" cy="82" rx="5" ry="3"/><ellipse cx="104" cy="82" rx="4" ry="2.6"/></g><path d="M58 70Q80 56 102 70Q94 78 80 76Q66 78 58 70Z" fill="#f2cf55" opacity=".92"/><g fill="#5f7a2e"><circle cx="72" cy="66" r="2"/><circle cx="88" cy="64" r="2"/><circle cx="82" cy="70" r="1.6"/></g></svg></div><h3>طبق الفول</h3><p class="u-qty num">٦٥<small>طبق</small></p><p class="u-note">معلقة كبيرة على وش كل طبق</p></article>
+        <article class="u-card"><div class="u-art"><svg viewBox="0 0 160 120" aria-hidden="true"><g><ellipse cx="62" cy="56" rx="18" ry="9" fill="#7e9a3e" transform="rotate(-20 62 56)"/><ellipse cx="96" cy="54" rx="18" ry="9" fill="#5f7a2e" transform="rotate(25 96 54)"/><ellipse cx="80" cy="50" rx="16" ry="8" fill="#93ad55"/><circle cx="70" cy="60" r="9" fill="#c8453a"/><circle cx="70" cy="60" r="4" fill="#e4776b"/><circle cx="99" cy="62" r="8" fill="#c8453a"/><circle cx="86" cy="62" r="8" fill="#d9e3a8" stroke="#5f7a2e" stroke-width="2"/></g><path d="M22 66h116c0 26-26 42-58 42S22 92 22 66z" fill="#f8f2dc" stroke="#1f2a12" stroke-width="2"/><path d="M34 78h92" stroke="#e8bd3d" stroke-width="3" stroke-linecap="round"/><path d="M128 30a14 14 0 0 1 0 28z" fill="#f2d24a" stroke="#1f2a12" stroke-width="1.5"/></svg></div><h3>السلطة</h3><p class="u-qty num">٣٣<small>طبق</small></p><p class="u-note">معلقتين لطبق سلطة العيلة</p></article>
+        <article class="u-card"><div class="u-art"><svg viewBox="0 0 160 120" aria-hidden="true"><ellipse cx="54" cy="70" rx="40" ry="30" fill="#c98f4a" stroke="#1f2a12" stroke-width="2"/><ellipse cx="54" cy="66" rx="30" ry="20" fill="#d9a35f"/><g fill="#a86f33"><circle cx="44" cy="62" r="2"/><circle cx="62" cy="60" r="2"/><circle cx="54" cy="72" r="2"/></g><ellipse cx="116" cy="86" rx="32" ry="12" fill="#f8f2dc" stroke="#1f2a12" stroke-width="2"/><ellipse cx="116" cy="84" rx="24" ry="7" fill="#e8bd3d"/><path d="M104 82q12-10 24 0" fill="#6a6b2a"/><g fill="#4f5320"><circle cx="110" cy="80" r="1.4"/><circle cx="118" cy="78" r="1.4"/><circle cx="124" cy="81" r="1.4"/></g><g stroke="#1f2a12" stroke-width="1.5"><rect x="96" y="38" width="20" height="18" rx="2" fill="#fbfaf2"/><rect x="118" y="44" width="18" height="16" rx="2" fill="#fbfaf2"/></g></svg></div><h3>الجبنة والزعتر</h3><p class="u-qty num">٤٥<small>فطار</small></p><p class="u-note">معلقة ونص لغموس الفرد</p></article>
+        <article class="u-card"><div class="u-art"><svg viewBox="0 0 160 120" aria-hidden="true"><g stroke="#4a4519" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".55"><path d="M64 30q-6-8 0-16"/><path d="M80 28q-6-8 0-16"/><path d="M96 30q-6-8 0-16"/></g><rect x="40" y="46" width="80" height="10" rx="5" fill="#3a4d27" stroke="#1f2a12" stroke-width="2"/><rect x="74" y="38" width="12" height="9" rx="3" fill="#2c3a17"/><path d="M42 58h76v34a14 14 0 0 1-14 14H56a14 14 0 0 1-14-14z" fill="#566b2f" stroke="#1f2a12" stroke-width="2"/><path d="M42 66h-10a6 6 0 0 0 0 12h10M118 66h10a6 6 0 0 1 0 12h-10" fill="none" stroke="#1f2a12" stroke-width="2.4"/><path d="M50 74h60" stroke="#e8bd3d" stroke-width="3" stroke-linecap="round" opacity=".8"/></svg></div><h3>الطبيخ</h3><p class="u-qty num">٢٢<small>طبخة</small></p><p class="u-note">٣ معالق للتشويح في الحلة</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="deliver" id="delivery">
+    <div class="wrap">
+      <div>
+        <h2 class="sec-h">الشحن لكل مصر</h2>
+        <p class="sec-p">اختار محافظتك وشوف مصاريف الشحن ومدة التوصيل قبل ما تطلب.</p>
+        <div class="ship-tool">
+          <label for="shipGov">محافظتك</label>
+          <div class="f"><select id="shipGov"></select></div>
+          <div class="ship-out">
+            <div><small>مصاريف الشحن</small><b class="num" id="shipFee">٤٠ جنيه</b></div>
+            <div><small>مدة التوصيل</small><b class="num" id="shipDays">١ – ٢ يوم</b></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="sec-h">ادفع بالطريقة اللي تريحك</h2>
+        <p class="sec-p">بتختار طريقة الدفع وانت بتكمل الطلب.</p>
+        <ul class="pay-list">
+          <li><div class="pi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg></div><div><h3>كاش عند الاستلام</h3><p>تدفع للمندوب لما الزيت يوصلك.</p></div></li>
+          <li><div class="pi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><div><h3>فودافون كاش</h3><p>تحوّل المبلغ قبل الشحن، وبنبعتلك رقم التحويل بعد الطلب.</p></div></li>
+          <li><div class="pi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h16M6 10V7l6-4 6 4v3M6 14v4M10 14v4M14 14v4M18 14v4M4 21h16"/></svg></div><div><h3>إنستاباي</h3><p>تحويل بنكي فوري قبل الشحن.</p></div></li>
+          <li class="soon"><div class="pi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div><div><h3>كارت وApple Pay <span class="tag">قريباً</span></h3><p>شغالين عليها.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <h2 class="sec-h">أسئلة بتتكرر</h2>
+      <div>
+        <details><summary>هعرف إن الطلب اتسجل إزاي؟<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>بعد ما تطلب بيظهرلك رقم طلب، وبنبعتلك رسالة واتساب على نفس الرقم نأكد فيها الطلب والعنوان قبل ما نشحن.</p></details>
+        <details><summary>التوصيل بياخد قد إيه؟<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>من يوم لخمس أيام حسب المحافظة. المدة الخاصة بمحافظتك موجودة في قسم الشحن فوق.</p></details>
+        <details><summary>ينفع أفتح الزجاجة قبل ما أدفع؟<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>في الدفع عند الاستلام تقدر تشوف الزجاجة وتتأكد منها قبل ما تدفع للمندوب.</p></details>
+        <details><summary>أحفظ الزيت إزاي؟<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>في دولاب بعيد عن الشمس وعن البوتاجاز، واقفل الغطا كويس بعد كل استعمال.</p></details>
+        <details><summary>عايز كمية كبيرة أو هدايا<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>اطلب العدد اللي محتاجه من السلة، ولو الكمية كبيرة اكتب في الملاحظات وهنكلمك نتفق.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="farm-bg" aria-hidden="true"><img src="hero-crates.jpg" alt="" loading="lazy"></div>
+    <div class="wrap">
+      <h2 class="sec-h">إزازة من الموسم ده لبيتك</h2>
+      <button class="btn btn-oil" type="button" id="closeAdd">أضف لتر للسلة، ٤٤٠ جنيه</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top"><svg width="28" height="28" aria-hidden="true"><use href="#sLeaf"/></svg><b>غُصن</b></a>
+    <span>زيت زيتون من مزرعة العيلة، مصر</span>
+    <span class="num">© ٢٠٢٦</span>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="sheet" id="sheet" aria-labelledby="sTitle" aria-hidden="true" inert>
+  <div class="s-head">
+    <div><h2 id="sTitle">السلة</h2><div class="s-steps" id="sSteps"><span class="on">السلة</span><span>·</span><span>البيانات</span><span>·</span><span>تم</span></div></div>
+    <button class="icon-btn" type="button" id="sClose" aria-label="اقفل"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="s-body" id="sBody"></div>
+  <div class="s-foot" id="sFoot"></div>
+</aside>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="صور من المزرعة" hidden>
+  <div id="lbMedia" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center"></div>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="اقفل"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button type="button" class="lb-btn lb-prev" id="lbPrev" aria-label="الصورة اللي قبلها"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  <button type="button" class="lb-btn lb-next" id="lbNext" aria-label="الصورة اللي بعدها"><svg class="ico" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <p class="lb-cap num" id="lbCap"></p>
+</div>
+<div class="buybar" id="buybar" aria-hidden="true">
+  <div class="bb-t"><b id="bbName">زيت زيتون ١ لتر</b><small class="num" id="bbPrice">٤٤٠ جنيه</small></div>
+  <button class="btn btn-oil" type="button" id="bbAdd" tabindex="-1">أضف للسلة</button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  "use strict";
+  // ===== بيانات المتجر =====
+  const API = (window.GHOSN_API || "").trim();
+  // لينك المسوّق: ?ref=ali بيتحفظ ٣٠ يوم، وآخر لينك العميل دخل منه هو اللي بيتحسب
+  let REF = "";
+  try{
+    const q = (new URLSearchParams(location.search).get("ref")||"").trim().toLowerCase();
+    if(/^[a-z0-9_-]{2,30}$/.test(q)){ REF = q; try{ localStorage.setItem("ghosn-ref", JSON.stringify({c:q,t:Date.now()})); }catch(e){} }
+    else { const s=JSON.parse(localStorage.getItem("ghosn-ref")||"null"); if(s && Date.now()-s.t < 30*864e5) REF = s.c; }
+  }catch(e){}
+  const NAME = "زيت زيتون إكسترا فيرجن";
+  // نفس أسعار تاب "المنتجات" في الشيت، وبتتحدث منه أول ما الصفحة تفتح
+  let PRODUCTS = [{id:"5l",name:"٥ لتر (جركن)",liters:5,price:2100,regular:2400},{id:"3l",name:"٣ لتر (جركن)",liters:3,price:1290,regular:1440},{id:"1l",name:"١ لتر",liters:1,price:440,regular:500},{id:"750ml",name:"٣/٤ لتر",liters:0.75,price:340,regular:390},{id:"500ml",name:"نص لتر",liters:0.5,price:230,regular:260}];
+  // آخر يوم في سعر الافتتاح (من تاب الإعدادات). بعده الشيت بيرجع السعر العادي لوحده
+  let OFFER_END = "2026-11-30";
+  const prod = id => PRODUCTS.find(p=>p.id===id);
+  let SEL = "1l";
+  let TRANSFER = { vodafone:"", instapay:"" };
+  let ACCEPTING = true, MAXQ = 30;
+  // نفس أرقام الشيت. أول ما الصفحة تفتح بتتحدث من الشيت
+  let SHIP = [["الإسكندرية",70,"١ – ٢ يوم"],["البحيرة",90,"٢ – ٣ أيام"],["القاهرة",90,"٢ – ٣ أيام"],["الجيزة",90,"٢ – ٣ أيام"],["القليوبية",90,"٢ – ٣ أيام"],["الدقهلية",90,"٢ – ٣ أيام"],["الشرقية",90,"٢ – ٣ أيام"],["الغربية",90,"٢ – ٣ أيام"],["المنوفية",90,"٢ – ٣ أيام"],["كفر الشيخ",90,"٢ – ٣ أيام"],["دمياط",90,"٢ – ٣ أيام"],["بورسعيد",90,"٢ – ٣ أيام"],["الإسماعيلية",90,"٢ – ٣ أيام"],["السويس",90,"٢ – ٣ أيام"],["الفيوم",110,"٣ – ٤ أيام"],["بني سويف",110,"٣ – ٤ أيام"],["المنيا",110,"٣ – ٤ أيام"],["أسيوط",110,"٣ – ٤ أيام"],["سوهاج",110,"٣ – ٤ أيام"],["قنا",110,"٣ – ٤ أيام"],["الأقصر",110,"٣ – ٤ أيام"],["أسوان",110,"٣ – ٤ أيام"],["البحر الأحمر",140,"٤ – ٥ أيام"],["مطروح",140,"٤ – ٥ أيام"],["شمال سيناء",140,"٤ – ٥ أيام"],["جنوب سيناء",140,"٤ – ٥ أيام"],["الوادي الجديد",140,"٤ – ٥ أيام"]].map(([gov,fee,days])=>({gov,fee,days}));
+  const PAY = { cod:"كاش عند الاستلام", vodafone:"فودافون كاش", instapay:"إنستاباي" };
+
+  const $ = id => document.getElementById(id);
+  const ar = n => Number(n).toLocaleString("ar-EG");
+  const egp = n => ar(n) + " جنيه";
+  const zoneOf = g => SHIP.find(z=>z.gov===g) || SHIP[0];
+  const esc = s => String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const bottles = n => n===1 ? "إزازة واحدة" : n===2 ? "إزازتين" : ar(n) + (n<=10?" إزايز":" إزازة");
+  const jerry = p => /جركن|جركل|صفيحة/.test(p.name);
+  const units = (n,p) => !jerry(p) ? bottles(n) : n===1 ? "جركن واحد" : n===2 ? "جركنين" : ar(n) + (n<=10?" جراكن":" جركن");
+  const pieces = n => n===1 ? "عبوة واحدة" : n===2 ? "عبوتين" : ar(n) + (n<=10?" عبوات":" عبوة");
+  const short = p => p.name.replace(/\s*\(.*?\)\s*/g,"").trim();
+  const offerOn = () => { if(!OFFER_END) return false; const t=new Date(); const today=t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0")+"-"+String(t.getDate()).padStart(2,"0"); return today <= OFFER_END; };
+  const offerDay = () => new Date(OFFER_END+"T12:00:00").toLocaleDateString("ar-EG",{day:"numeric",month:"long"});
+  function noteFor(p){
+    const one = PRODUCTS.find(x=>x.liters===1);
+    const parts = [];
+    if(one && p.liters>1 && Number.isInteger(p.liters)){ const save = p.liters*one.price - p.price; if(save>0) parts.push(`اللتر بـ<b>${ar(Math.round(p.price/p.liters))}</b> ج، أوفر <b>${ar(save)} ج</b> من ${ar(p.liters)} إزايز لتر.`); }
+    if(p.regular>p.price && offerOn()) parts.push(`سعر الافتتاح لحد ${offerDay()}، بعدها ${ar(p.regular)} ج.`);
+    return parts.join(" ");
+  }
+
+  // ===== state =====
+  let CART = {};
+  try {
+    CART = JSON.parse(localStorage.getItem("ghosn-cart")||"null") || {};
+    const old = parseInt(localStorage.getItem("ghosn-qty")||"0",10); if(old>0 && !Object.keys(CART).length) CART = {"1l":old};
+  } catch(e){ CART = {}; }
+  const saveCart = () => { try{ localStorage.setItem("ghosn-cart", JSON.stringify(CART)); localStorage.removeItem("ghosn-qty"); }catch(e){} };
+  const cartCount = () => Object.values(CART).reduce((a,b)=>a+b,0);
+  const cartSub = () => Object.entries(CART).reduce((a,[id,q])=>a+(prod(id)?prod(id).price*q:0),0);
+  function cleanCart(){ Object.keys(CART).forEach(id=>{ if(!prod(id) || !(CART[id]>0)) delete CART[id]; }); saveCart(); }
+  function setLine(id,q){ const others=cartCount()-(CART[id]||0); q=Math.max(0,Math.min(MAXQ-others,q)); if(q>0) CART[id]=q; else delete CART[id]; saveCart(); }
+  let draft = {};
+  try { draft = JSON.parse(localStorage.getItem("ghosn-draft")||"{}")||{}; } catch(e){ draft = {}; }
+  const saveDraft = () => { try{ localStorage.setItem("ghosn-draft", JSON.stringify(draft)); }catch(e){} };
+  let view = "cart", lastOrder = null;
+
+  function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("on"),2000); }
+  function badge(){ $("cartN").textContent = ar(cartCount()); const b=$("cartBtn"); b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); }
+
+  // ===== hero label =====
+  let hq = 1;
+  // "حجم تاني": العميل يكتب اللترات، وإحنا نقسمها على أرخص تركيبة من العبوات اللي عندنا
+  const CUSTOM = "custom", MAXL = 60;
+  function combo(L){
+    const ps = PRODUCTS.filter(p=>p.liters>0 && Number.isInteger(p.liters*2));
+    const U = Math.round(L*2), best = [{cost:0,n:0,pick:null}];
+    for(let u=1; u<=U; u++){ best[u]=null;
+      ps.forEach(p=>{ const w=Math.round(p.liters*2), b=best[u-w]; if(w<=u && b){ const c={cost:b.cost+p.price,n:b.n+1,pick:p,prev:u-w}; if(!best[u] || c.cost<best[u].cost || (c.cost===best[u].cost && c.n<best[u].n)) best[u]=c; } }); }
+    if(!best[U]) return null;
+    const lines={}; for(let u=U; u>0; u=best[u].prev){ const id=best[u].pick.id; lines[id]=(lines[id]||0)+1; }
+    return { cost:best[U].cost, lines:PRODUCTS.filter(p=>lines[p.id]).map(p=>({p,q:lines[p.id]})) };
+  }
+  function setCustom(n){
+    hq=Math.max(1,Math.min(MAXL,n)); const c=combo(hq);
+    $("hQty").textContent=ar(hq); if(document.activeElement!==$("hLit")) $("hLit").value=hq; $("hMinus").disabled = hq<=1; $("hPlus").disabled = hq>=MAXL;
+    $("lVol").textContent=ar(hq)+" لتر"; $("lPrice").textContent = c ? ar(c.cost) : "—";
+    $("hSum").textContent = c ? c.lines.map(l=>units(l.q,l.p)+" "+short(l.p)).join(" + ") : "الكمية دي مش متاحة";
+    const one = PRODUCTS.find(x=>x.liters===1);
+    $("lNote").innerHTML = c && one && one.price*hq>c.cost ? `اللتر بـ<b>${ar(Math.round(c.cost/hq))}</b> ج، أوفر <b>${ar(one.price*hq-c.cost)} ج</b> من ${ar(hq)} إزايز لتر.` : "";
+    $("hAdd").disabled = !c || !ACCEPTING;
+    if(window.__bottle3d) window.__bottle3d.setSize(Math.min(5,hq),ar(hq)+" لتر");
+  }
+  function setH(n){ if(SEL===CUSTOM) return setCustom(n); $("hPlus").disabled=false; $("hAdd").disabled=!ACCEPTING; const p=prod(SEL)||PRODUCTS[0]; hq=Math.max(1,Math.min(MAXQ,n)); $("hQty").textContent=ar(hq); $("hSum").textContent = units(hq,p)+" "+short(p)+"، "+egp(hq*p.price); $("hMinus").disabled = hq<=1; $("lPrice").textContent=ar(p.price); $("lVol").textContent=short(p); $("lNote").innerHTML=noteFor(p); if(window.__bottle3d) window.__bottle3d.setSize(p.liters,short(p)); }
+  function renderSizes(){
+    if(!prod(SEL) && SEL!==CUSTOM) SEL = (PRODUCTS.find(p=>p.liters===1)||PRODUCTS[0]||{}).id;
+    $("sizes").hidden = PRODUCTS.length<2;
+    const perL = PRODUCTS.filter(p=>p.liters>0).map(p=>p.price/p.liters), best = Math.min(...perL);
+    const bestId = PRODUCTS.length>2 ? (PRODUCTS.find(p=>p.liters>1 && p.price/p.liters===best)||{}).id : null;
+    $("sizes").innerHTML = PRODUCTS.map(p=>`<button type="button" role="radio" aria-checked="${p.id===SEL}" data-id="${esc(p.id)}">${p.id===bestId?'<span class="tag">الأوفر</span>':''}${esc(short(p))}<small class="num">${ar(p.price)} ج</small></button>`).join("")
+      + `<button type="button" role="radio" aria-checked="${SEL===CUSTOM}" data-id="${CUSTOM}">حجم تاني<small>اكتب اللترات</small></button>`;
+    $("sizes").querySelectorAll("button").forEach(b=>b.onclick=()=>{ const was=SEL; SEL=b.dataset.id; renderSizes(); setH(SEL===CUSTOM && was!==CUSTOM ? 8 : was===CUSTOM && SEL!==CUSTOM ? 1 : hq); setStepLabels(); if(window.__syncBar) window.__syncBar(); });
+  }
+  function setStepLabels(){ const c=SEL===CUSTOM; $("hPlus").setAttribute("aria-label", c?"زوّد لتر":"زوّد زجاجة"); $("hMinus").setAttribute("aria-label", c?"قلّل لتر":"قلّل زجاجة"); $("hQty").title = c ? "لتر" : ""; $("hQty").classList.toggle("is-l", c); $("hQty").hidden=c; $("hLit").hidden=!c;
+  }
+  $("hPlus").onclick=()=>setH(hq+1); $("hMinus").onclick=()=>setH(hq-1);
+  $("hLit").addEventListener("input",e=>{ const v=parseInt(String(e.target.value).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)),10); if(v>0) setCustom(v); });
+  $("hLit").addEventListener("blur",()=>{ $("hLit").value=hq; });
+  function addToCart(id,n){ const p=prod(id); if(!p) return; const before=CART[id]||0; setLine(id,before+n); const added=(CART[id]||0)-before; badge(); render();
+    toast(added>0 ? "اتضاف "+units(added,p)+" "+short(p)+" للسلة" : "وصلت لأقصى عدد في الطلب ("+ar(MAXQ)+")"); }
+  $("hAdd").onclick=()=>{
+    if(SEL!==CUSTOM){ addToCart(SEL,hq); setH(1); return; }
+    const c=combo(hq); if(!c) return;
+    if(cartCount()+c.lines.reduce((a,l)=>a+l.q,0) > MAXQ) return toast("وصلت لأقصى عدد في الطلب ("+ar(MAXQ)+")");
+    c.lines.forEach(l=>setLine(l.p.id,(CART[l.p.id]||0)+l.q)); badge(); render();
+    toast("اتضاف "+ar(hq)+" لتر للسلة: "+c.lines.map(l=>ar(l.q)+" × "+short(l.p)).join(" + "));
+  };
+  $("closeAdd").onclick=()=>addToCart((PRODUCTS.find(p=>p.liters===1)||PRODUCTS[0]).id,1);
+
+
+  // ===== الإزازة الـ 3D =====
+  (function(){
+    const box=$("bottle"), cv=$("bottle3d");
+    let api=null, wantLiters=1, wantName="١ لتر";
+    window.__bottle3d = { setSize(l,name){ wantLiters=l||1; wantName=name||""; if(api) api.setSize(wantLiters,wantName); } };
+    try{ const t=document.createElement("canvas"); if(!(t.getContext("webgl")||t.getContext("experimental-webgl"))) return; }catch(e){ return; }
+    const sc=document.createElement("script");
+    sc.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"; sc.async=true;
+    sc.onload=()=>{ try{ api=init(window.THREE); api.setSize(wantLiters,wantName); }catch(e){ console.warn("3d off",e); } };
+    document.head.appendChild(sc);
+
+    function init(T){
+      let still=false; try{ still=matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){}
+      const renderer=new T.WebGLRenderer({canvas:cv, alpha:true, antialias:true, powerPreference:"high-performance"});
+      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio||1));
+      renderer.outputEncoding=T.sRGBEncoding; renderer.toneMapping=T.ACESFilmicToneMapping; renderer.toneMappingExposure=.92;
+      const scene=new T.Scene();
+      const cam=new T.PerspectiveCamera(28, 1, .1, 60);
+      cam.position.set(0, 2.85, 13); cam.lookAt(0, 2.4, 0);
+
+      // إضاءة استوديو: نعمل environment من شرايح منورة عشان الإزاز يعكس
+      const pm=new T.PMREMGenerator(renderer);
+      const env=new T.Scene();
+      const strip=(w,h,x,y,z,ry,c,i)=>{ const m=new T.Mesh(new T.PlaneGeometry(w,h), new T.MeshBasicMaterial({color:new T.Color(c).multiplyScalar(i), side:T.DoubleSide})); m.position.set(x,y,z); m.rotation.y=ry; env.add(m); };
+      env.add(new T.Mesh(new T.SphereGeometry(30,16,8), new T.MeshBasicMaterial({color:0x0c1407, side:T.BackSide})));
+      strip(3,14,-7,4,3, Math.PI/2.6,0xffffff,4);     // softbox شمال
+      strip(2,14, 7,4,2,-Math.PI/2.4,0xfff1c4,3);     // softbox يمين دافي
+      strip(14,2, 0,10,0, 0,0xffffff,2.2); env.children[env.children.length-1].rotation.x=Math.PI/2;
+      strip(8,6, 0,2,-9, 0,0x2e4a18,1.2);              // ورا: أخضر زي الشجر
+      scene.environment=pm.fromScene(env, .04).texture;
+
+      scene.add(new T.HemisphereLight(0xfff4d6, 0x1a2610, .4));
+      const key=new T.DirectionalLight(0xfff0cc, 1.6); key.position.set(-4,7,6); scene.add(key);
+      const rim=new T.DirectionalLight(0xe8bd3d, 1.4); rim.position.set(5,4,-5); scene.add(rim);
+
+      // شكل الإزازة: بروفايل بيلف حوالين المحور
+      const P=(a)=>a.map(([r,y])=>new T.Vector2(r,y));
+      const outer=P([[0,0],[.86,0],[.97,.05],[1.02,.22],[1.03,.5],[1.03,2.15],[1.0,2.42],[.9,2.66],[.66,2.92],[.42,3.14],[.31,3.36],[.285,3.6],[.28,4.02],[.31,4.06],[.31,4.14],[.27,4.17]]);
+      const group=new T.Group(); scene.add(group);
+      const glassMat=new T.MeshPhysicalMaterial({color:0xdfead0, metalness:0, roughness:.03, clearcoat:1, clearcoatRoughness:.02, transparent:true, opacity:.2, envMapIntensity:3, depthWrite:false, side:T.FrontSide});
+      const glass=new T.Mesh(new T.LatheGeometry(outer, 96), glassMat); glass.renderOrder=3; group.add(glass);
+
+      // الزيت جوه
+      const oilPts=P([[0,.07],[.9,.07],[.97,.25],[.975,.5],[.975,2.15],[.95,2.4],[.85,2.62],[.66,2.84],[0,2.84]]);
+      const oilMat=new T.MeshPhysicalMaterial({color:0xc4900f, emissive:0x7a4a00, emissiveIntensity:.55, roughness:.18, metalness:0, clearcoat:.9, clearcoatRoughness:.08, transparent:true, opacity:.96, envMapIntensity:.7});
+      const oil=new T.Mesh(new T.LatheGeometry(oilPts, 96), oilMat); oil.renderOrder=1; group.add(oil);
+      // سطح الزيت فيه لمعة
+      const surf=new T.Mesh(new T.CircleGeometry(.655,64), new T.MeshPhysicalMaterial({color:0xe0ad2c, emissive:0x8a5600, emissiveIntensity:.5, roughness:.05, clearcoat:1, transparent:true, opacity:.9}));
+      surf.rotation.x=-Math.PI/2; surf.position.y=2.841; surf.renderOrder=2; group.add(surf);
+
+      // الغطا
+      const capMat=new T.MeshStandardMaterial({color:0x6f8f3a, roughness:.4, metalness:.15});
+      const cap=new T.Mesh(new T.CylinderGeometry(.35,.35,.5,48), capMat); cap.position.y=4.4; group.add(cap);
+      const capTop=new T.Mesh(new T.CylinderGeometry(.33,.35,.06,48), capMat); capTop.position.y=4.68; group.add(capTop);
+      const ring=new T.Mesh(new T.TorusGeometry(.33,.035,12,48), new T.MeshStandardMaterial({color:0xc9a227, roughness:.3, metalness:.8})); ring.rotation.x=Math.PI/2; ring.position.y=4.16; group.add(ring);
+
+      // الليبل: كانفاس بيترسم عليه وبيلف على الإزازة
+      const lc=document.createElement("canvas"); lc.width=1400; lc.height=560;
+      const lt=new T.CanvasTexture(lc); lt.encoding=T.sRGBEncoding; lt.anisotropy=8;
+      const arc=Math.PI*1.08;
+      const label=new T.Mesh(new T.CylinderGeometry(1.045,1.045,1.42,96,1,true, -arc/2, arc), new T.MeshStandardMaterial({map:lt, roughness:.62, metalness:0, side:T.FrontSide}));
+      label.position.y=1.28; label.renderOrder=2; group.add(label);
+      function drawLabel(sizeName){
+        const c=lc.getContext("2d"), W=lc.width, H=lc.height;
+        c.save();
+        const g=c.createLinearGradient(0,0,0,H); g.addColorStop(0,"#f7f0d6"); g.addColorStop(1,"#ece0b8"); c.fillStyle=g; c.fillRect(0,0,W,H);
+        c.strokeStyle="rgba(31,42,18,.55)"; c.lineWidth=5; c.strokeRect(26,26,W-52,H-52);
+        c.strokeStyle="rgba(31,42,18,.25)"; c.lineWidth=2; c.strokeRect(40,40,W-80,H-80);
+        c.fillStyle="#3e5024"; c.fillRect(0,H-70,W,70);
+        c.direction="rtl"; c.textAlign="center"; c.fillStyle="#1f2a12";
+        c.font='700 190px "Aref Ruqaa", serif'; c.fillText("غُصن", W/2, 255);
+        c.font='500 54px "Readex Pro", sans-serif'; c.fillStyle="#3d4a26"; c.fillText("زيت زيتون إكسترا فيرجن", W/2, 345);
+        c.font='400 42px "Readex Pro", sans-serif'; c.fillStyle="#566040"; c.fillText("من مزرعتنا · عصرة ٢٠٢٦", W/2, 412);
+        c.font='600 40px "Readex Pro", sans-serif'; c.fillStyle="#f3ecd0"; c.fillText(sizeName||"١ لتر", W/2, H-22);
+        // غصن صغير
+        c.strokeStyle="#566b2f"; c.lineWidth=6; c.beginPath(); c.moveTo(W/2-250,170); c.quadraticCurveTo(W/2-200,110,W/2-140,95); c.stroke();
+        c.fillStyle="#7a8f45"; [[-232,142,-.9],[-196,112,-.5],[-160,98,-.2]].forEach(([x,y,r])=>{ c.save(); c.translate(W/2+x,y); c.rotate(r); c.beginPath(); c.ellipse(0,0,30,11,0,0,Math.PI*2); c.fill(); c.restore(); });
+        c.fillStyle="#2c3a17"; c.beginPath(); c.ellipse(W/2-215,165,13,17,-.4,0,Math.PI*2); c.fill();
+        c.restore(); lt.needsUpdate=true;
+      }
+      let curName="١ لتر"; drawLabel(curName);
+      if(document.fonts && document.fonts.load){ Promise.all([document.fonts.load('700 190px "Aref Ruqaa"'), document.fonts.load('500 54px "Readex Pro"')]).then(()=>drawLabel(curName)).catch(()=>{}); }
+
+      // الألوان مكتوبة sRGB، نحولها linear عشان الإضاءة تطلع صح
+      group.traverse(o=>{ const m=o.material; if(m && !m.map){ m.color.convertSRGBToLinear(); if(m.emissive) m.emissive.convertSRGBToLinear(); } });
+
+      // ضل على الأرض
+      const sc2=document.createElement("canvas"); sc2.width=sc2.height=256; const sx=sc2.getContext("2d"); const rg=sx.createRadialGradient(128,128,0,128,128,128); rg.addColorStop(0,"rgba(0,0,0,.75)"); rg.addColorStop(.55,"rgba(0,0,0,.28)"); rg.addColorStop(1,"rgba(0,0,0,0)"); sx.fillStyle=rg; sx.fillRect(0,0,256,256);
+      const shadow=new T.Mesh(new T.PlaneGeometry(3.6,3.6), new T.MeshBasicMaterial({map:new T.CanvasTexture(sc2), transparent:true, depthWrite:false}));
+      shadow.rotation.x=-Math.PI/2; shadow.position.y=-.02; scene.add(shadow);
+      // توهج دهبي ورا الإزازة
+      const gc=document.createElement("canvas"); gc.width=gc.height=256; const gx=gc.getContext("2d"); const gg=gx.createRadialGradient(128,128,0,128,128,128); gg.addColorStop(0,"rgba(246,216,114,.55)"); gg.addColorStop(1,"rgba(246,216,114,0)"); gx.fillStyle=gg; gx.fillRect(0,0,256,256);
+      const glow=new T.Mesh(new T.PlaneGeometry(7,7), new T.MeshBasicMaterial({map:new T.CanvasTexture(gc), transparent:true, depthWrite:false, blending:T.AdditiveBlending}));
+      glow.position.set(0,1.6,-2.2); /* التوهج من الـ CSS ورا الكانفاس */
+
+      // حجم الكانفاس
+      function resize(){ const r=box.getBoundingClientRect(); const w=Math.max(1,r.width), h=Math.max(1,r.height); renderer.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix(); }
+      resize(); window.addEventListener("resize", resize);
+
+      // السحب واللف
+      let rotY=-.25, vel=still?0:.0035, drag=null, scale=1, scaleTarget=1, tilt=0;
+      box.addEventListener("pointerdown", e=>{ drag={x:e.clientX, y:e.clientY, r:rotY, t:performance.now(), moved:false}; vel=0; box.setPointerCapture(e.pointerId); });
+      box.addEventListener("pointermove", e=>{ if(!drag) return; const dx=e.clientX-drag.x; if(Math.abs(dx)>4) drag.moved=true; const nr=drag.r + dx*.011; vel=(nr-rotY)*.6; rotY=nr; tilt=Math.max(-.12,Math.min(.12,(e.clientY-drag.y)*-.0015)); hideHint(); });
+      const end=()=>{ if(!drag) return; drag=null; if(Math.abs(vel)<.002 && !still) vel=.0035; };
+      box.addEventListener("pointerup", end); box.addEventListener("pointercancel", end);
+      const hint=$("dragHint"); hint.hidden=false; let hintT=setTimeout(hideHint,5000);
+      function hideHint(){ clearTimeout(hintT); hint.classList.add("gone"); }
+
+      // ارسم بس لما الإزازة باينة
+      let visible=true, raf=0, t0=performance.now();
+      if("IntersectionObserver" in window) new IntersectionObserver(([en])=>{ visible=en.isIntersecting; if(visible && !raf) loop(); }).observe(box);
+      function loop(){
+        raf=0; if(!visible || document.hidden) return;
+        const t=(performance.now()-t0)/1000;
+        if(!drag){ rotY+=vel; vel+= ((still?0:.0035)-vel)*.02; tilt*=.92; }
+        scale+=(scaleTarget-scale)*.08;
+        group.rotation.y=rotY; group.rotation.x=tilt*.6;
+        group.scale.setScalar(scale);
+        group.position.y= still?0: Math.sin(t*1.1)*.06 + .02;
+        shadow.scale.setScalar(scale*(1-Math.sin(t*1.1)*.03));
+        renderer.render(scene,cam);
+        raf=requestAnimationFrame(loop);
+      }
+      document.addEventListener("visibilitychange",()=>{ if(!document.hidden && !raf) loop(); });
+      loop();
+      box.classList.add("is3d");
+      return { setSize(l,name){ scaleTarget=Math.min(1.15,Math.cbrt(Math.max(.2,l))); if(name && name!==curName){ curName=name; drawLabel(name); } } };
+    }
+  })();
+
+  // ===== العمق: بارالاكس + ميل الإزازة + شريط الطلب =====
+  (function(){
+    let still=false; try{ still=matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){}
+    const hero=document.querySelector(".hero"), bg=$("farmBg"), bottle=$("bottle"), leaves=[...document.querySelectorAll(".lf")];
+    const fine = (()=>{ try{ return matchMedia("(hover:hover) and (pointer:fine)").matches; }catch(e){ return false; } })();
+    if(!still){
+      let tick=false;
+      const onScroll=()=>{ if(tick) return; tick=true; requestAnimationFrame(()=>{ tick=false;
+        const y=Math.min(window.scrollY, hero.offsetHeight);
+        bg.style.setProperty("--py", (y*0.35)+"px");
+        leaves.forEach(l=>l.style.setProperty("--ly", (-y*Number(l.dataset.depth||0.3))+"px"));
+      }); };
+      window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+    }
+    // زرار "اختار حجمك": ينزل للإزازة ويركّز على الأحجام
+    $("ctaOrder").addEventListener("click", e=>{ e.preventDefault(); bottle.scrollIntoView({behavior: still?"auto":"smooth", block:"center"}); setTimeout(()=>{ const b=document.querySelector('#sizes [aria-checked="true"]')||$("hAdd"); b.focus({preventScroll:true}); }, still?0:600); });
+    // شريط الطلب على الموبايل
+    const bar=$("buybar");
+    // في "حجم تاني" الشريط بيعرض لتر واحد، والكمية المخصصة بتتطلب من الإزازة فوق
+    const barProd=()=>prod(SEL)||PRODUCTS.find(p=>p.liters===1)||PRODUCTS[0];
+    const syncBar=()=>{ const p=barProd(); if(!p) return; $("bbName").textContent=NAME.replace("إكسترا فيرجن","")+" "+short(p); $("bbPrice").textContent=egp(p.price); };
+    $("bbAdd").onclick=()=>addToCart(barProd().id,1);
+    if("IntersectionObserver" in window){
+      new IntersectionObserver(([en])=>{ const show=!en.isIntersecting && en.boundingClientRect.top<0 && ACCEPTING; bar.classList.toggle("on",show); bar.setAttribute("aria-hidden",String(!show)); $("bbAdd").tabIndex=show?0:-1; syncBar(); }, {threshold:0}).observe(document.querySelector(".label"));
+    }
+    window.__syncBar = syncBar;
+  })();
+
+  // ===== صور المزرعة في الخلفية =====
+  (function(){
+    const imgs=[...document.querySelectorAll("#farmBg img")], dots=$("farmDots"); if(imgs.length<2) return;
+    const caps=["شجر المزرعة","القطف بالإيد","محصول الموسم"]; let i=0, timer=null;
+    dots.innerHTML=imgs.map((_,k)=>`<button type="button" aria-label="${caps[k]||""}" aria-current="${k===0}"></button>`).join("");
+    const show=k=>{ i=(k+imgs.length)%imgs.length; imgs.forEach((im,j)=>im.classList.toggle("on",j===i)); dots.querySelectorAll("button").forEach((d,j)=>d.setAttribute("aria-current",String(j===i))); };
+    let still=false; try{ still=matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){}
+    const start=()=>{ if(!still && !timer) timer=setInterval(()=>show(i+1),6500); }, stop=()=>{ clearInterval(timer); timer=null; };
+    dots.querySelectorAll("button").forEach((d,j)=>d.onclick=()=>{ stop(); show(j); start(); });
+    document.addEventListener("visibilitychange",()=>document.hidden?stop():start());
+    start();
+  })();
+
+  // ===== photo gallery =====
+  const vid=$("harvestVid");
+  try{ if(vid && matchMedia("(prefers-reduced-motion: reduce)").matches){ vid.removeAttribute("autoplay"); vid.pause(); } }catch(e){}
+  const toItem=b=>{ const m=b.querySelector("img,video"); const c=b.querySelector(".cap span"); return { video: m.tagName==="VIDEO", full: !!b.dataset.full, src: b.dataset.full || m.getAttribute("src"), poster: m.getAttribute("poster"), alt: m.getAttribute("alt")||m.getAttribute("aria-label")||"", cap: c?c.textContent:"" }; };
+  const gItems=[...document.querySelectorAll(".g-item")].map(toItem), hItems=[...document.querySelectorAll(".h-thumb")].map(toItem);
+  let lbList=gItems;
+  let gi=0, lastFocus=null; const lb=$("lb");
+  function showLb(i){
+    gi=(i+lbList.length)%lbList.length; const it=lbList[gi], box=$("lbMedia");
+    box.innerHTML = it.video ? `<video src="${it.src}" poster="${it.poster||""}" controls autoplay muted playsinline ${it.full?"":"loop"} aria-label="${esc(it.alt)}"></video>` : `<img src="${it.src}" alt="${esc(it.alt)}">`;
+    $("lbCap").textContent = (it.cap ? it.cap + "، " : "") + ar(gi+1) + " من " + ar(lbList.length);
+  }
+  function openLb(i,list){ lbList=list||gItems; lastFocus=document.activeElement; showLb(i); lb.hidden=false; document.body.style.overflow="hidden"; $("lbClose").focus(); }
+  function closeLb(){ lb.hidden=true; $("lbMedia").innerHTML=""; document.body.style.overflow=""; if(lastFocus) lastFocus.focus(); }
+  document.querySelectorAll(".g-item").forEach((b,i)=>b.onclick=()=>openLb(i,gItems));
+  document.querySelectorAll(".h-thumb").forEach((b,i)=>b.onclick=()=>openLb(i,hItems));
+  $("lbClose").onclick=closeLb; $("lbPrev").onclick=()=>showLb(gi-1); $("lbNext").onclick=()=>showLb(gi+1);
+  lb.addEventListener("click",e=>{ if(e.target===lb || e.target.id==="lbMedia") closeLb(); });
+  document.addEventListener("keydown",e=>{ if(lb.hidden) return; if(e.key==="Escape") closeLb(); else if(e.key==="ArrowLeft") showLb(gi+1); else if(e.key==="ArrowRight") showLb(gi-1); });
+
+  // ===== shipping lookup =====
+  const shipSel=$("shipGov");
+  function fillShip(){ const cur=shipSel.value||draft.gov; shipSel.innerHTML = SHIP.map(z=>`<option>${esc(z.gov)}</option>`).join(""); if(cur && SHIP.some(z=>z.gov===cur)) shipSel.value=cur; }
+  fillShip();
+  function showShip(){ const z=zoneOf(shipSel.value); $("shipFee").textContent=egp(z.fee); $("shipDays").textContent=z.days; }
+  shipSel.onchange=showShip; showShip();
+
+  // ===== sheet =====
+  const sheet=$("sheet");
+  function openSheet(){ if(view==="done" && cartCount()>0) view="cart"; render(); sheet.classList.add("on"); $("scrim").classList.add("on"); sheet.setAttribute("aria-hidden","false"); sheet.inert=false; setTimeout(()=>$("sClose").focus(),50); }
+  function closeSheet(){ sheet.classList.remove("on"); $("scrim").classList.remove("on"); sheet.setAttribute("aria-hidden","true"); sheet.inert=true; $("cartBtn").focus(); }
+  $("cartBtn").onclick=openSheet; $("sClose").onclick=closeSheet; $("scrim").onclick=closeSheet;
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape" && sheet.classList.contains("on")) closeSheet(); });
+
+  function steps(i){ const s=$("sSteps").querySelectorAll("span:not(:nth-child(even))"); s.forEach((el,k)=>el.classList.toggle("on",k===i)); }
+  function sums(gov){ const sub=cartSub(); const fee=gov?zoneOf(gov).fee:null;
+    return `<div class="sums num"><div><span class="muted">الزيت (${pieces(cartCount())})</span><span>${egp(sub)}</span></div>
+      <div><span class="muted">الشحن${gov?" ("+esc(gov)+")":""}</span><span>${fee==null?"بيتحسب في الخطوة الجاية":egp(fee)}</span></div>
+      <div class="grand"><span>الإجمالي</span><span>${fee==null?egp(sub)+" + الشحن":egp(sub+fee)}</span></div></div>`; }
+
+  function render(){
+    const body=$("sBody"), foot=$("sFoot");
+    if(view==="cart"){
+      $("sTitle").textContent="السلة"; steps(0);
+      if(cartCount()<=0){
+        body.innerHTML=`<div class="empty"><svg viewBox="0 0 40 80" aria-hidden="true"><use href="#sMini"/></svg><p>السلة فاضية. ضيف زجاجة زيت وارجع هنا.</p></div>`;
+        foot.innerHTML=`<button class="btn btn-line" type="button" id="fShop">كمّل تسوق</button>`; $("fShop").onclick=closeSheet; return;
+      }
+      body.innerHTML=Object.entries(CART).map(([id,q])=>{ const p=prod(id); return `<div class="line-item">
+          <div class="mini"><img src="bottle-palm.jpg" alt=""></div>
+          <div><div class="t">${NAME}</div><div class="m num">${esc(p.name)}، ${egp(p.price)}</div></div>
+          <div class="step" role="group" aria-label="عدد ${esc(p.name)}"><button type="button" data-id="${esc(id)}" data-d="1" aria-label="زوّد"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><output class="num">${ar(q)}</output><button type="button" data-id="${esc(id)}" data-d="-1" aria-label="قلّل"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button></div>
+        </div>`; }).join("")+sums(null);
+      body.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{ setLine(b.dataset.id,(CART[b.dataset.id]||0)+ +b.dataset.d); badge(); render(); });
+      foot.innerHTML=`<button class="btn btn-oil" type="button" id="fNext">كمّل الطلب</button>`;
+      $("fNext").onclick=()=>{ view="checkout"; render(); };
+    }
+    else if(view==="checkout"){
+      $("sTitle").textContent="بيانات التوصيل"; steps(1);
+      const g = SHIP.some(z=>z.gov===draft.gov) ? draft.gov : shipSel.value;
+      body.innerHTML=`<form id="co" novalidate>
+        <div class="f"><label for="cName">الاسم</label><input id="cName" autocomplete="name" value="${esc(draft.name)}"><span class="err" hidden></span></div>
+        <div class="f"><label for="cPhone">رقم الموبايل</label><input id="cPhone" type="tel" inputmode="tel" dir="ltr" placeholder="01XXXXXXXXX" autocomplete="tel" value="${esc(draft.phone)}"><span class="err" hidden></span></div>
+        <div class="f"><label for="cGov">المحافظة</label><select id="cGov">${SHIP.map(x=>`<option${x.gov===g?" selected":""}>${esc(x.gov)}</option>`).join("")}</select></div>
+        <div class="f"><label for="cAddr">العنوان بالتفصيل</label><textarea id="cAddr" rows="3" placeholder="المدينة أو المنطقة، الشارع، رقم العمارة والدور، علامة مميزة">${esc(draft.addr)}</textarea><span class="err" hidden></span></div>
+        <fieldset><legend>طريقة الدفع</legend>
+          ${Object.entries(PAY).map(([k,v])=>`<label class="opt"><input type="radio" name="pay" value="${k}" ${ (draft.pay||"cod")===k?"checked":""}><span><b>${v}</b><small>${k==="cod"?"تدفع للمندوب وقت الاستلام":"تحوّل قبل الشحن وبنأكد معاك"}</small></span></label>`).join("")}
+          <label class="opt"><input type="radio" name="pay" disabled><span><b>كارت أو Apple Pay</b><small>قريباً</small></span></label>
+        </fieldset>
+        <div class="f"><label for="cNote">ملاحظات <span style="color:var(--text-3)">(اختياري)</span></label><input id="cNote" value="${esc(draft.note)}" placeholder="مثلاً: كلمني قبل ما تيجي"></div>
+        <div class="hp" aria-hidden="true"><label for="cSite">اتركها فاضية</label><input id="cSite" tabindex="-1" autocomplete="off"></div>
+        <div id="coErr" class="form-err" hidden></div>
+      </form><div id="coSums">${sums(g)}</div>`;
+      const sync=()=>{ draft={ name:$("cName").value, phone:$("cPhone").value, gov:$("cGov").value, addr:$("cAddr").value, note:$("cNote").value, pay:(body.querySelector("input[name=pay]:checked")||{}).value||"cod" }; saveDraft(); };
+      body.querySelectorAll("input,select,textarea").forEach(el=>el.addEventListener("input",sync));
+      $("cGov").addEventListener("change",()=>{ sync(); $("coSums").innerHTML=sums($("cGov").value); });
+      foot.innerHTML=`<button class="btn btn-oil" type="submit" form="co" id="fPlace">سجّل الطلب</button><button class="btn btn-line" type="button" id="fBack">ارجع للسلة</button>`;
+      $("fBack").onclick=()=>{ view="cart"; render(); };
+      $("co").addEventListener("submit",e=>{ e.preventDefault(); sync(); place(); });
+    }
+    else {
+      $("sTitle").textContent="الطلب اتسجل"; steps(2);
+      const o=lastOrder;
+      body.innerHTML=`<div class="done">
+        <div class="stamp" aria-hidden="true"><div><small>رقم الطلب</small><b class="num">${esc(o.number)}</b><small>غُصن</small></div></div>
+        <h3>شكراً يا ${esc(o.name.split(" ")[0])}</h3>
+        <p>طلبك رقم <b class="num" dir="ltr">${esc(o.number)}</b> اتسجل. هنبعتلك رسالة واتساب على <span dir="ltr" class="num">${esc(o.phone)}</span> نأكد فيها الطلب والعنوان قبل الشحن.</p>
+        ${o.payment!=="cod"?`<div class="transfer">حوّل <b class="num">${egp(o.total)}</b> على ${o.payment==="vodafone"?"فودافون كاش":"إنستاباي"}: <b class="num" dir="ltr">${esc(o.transferTo || "هنبعتهولك في مكالمة التأكيد")}</b><br>واكتب رقم الطلب في ملاحظة التحويل.</div>`:""}
+        <div class="recap num">
+          <div><span>الطلب</span><span>${(o.items||[]).map(it=>ar(it.qty)+" × "+esc(it.name)).join(" + ")}</span></div>
+          <div><span>الشحن إلى</span><span>${esc(o.gov)}، ${egp(o.shipping)}</span></div>
+          <div><span>الدفع</span><span>${PAY[o.payment]}</span></div>
+          <div><span>الإجمالي</span><b>${egp(o.total)}</b></div>
+        </div></div>`;
+      foot.innerHTML=`<button class="btn btn-line" type="button" id="fDone">رجوع للستور</button>`;
+      $("fDone").onclick=()=>{ view="cart"; closeSheet(); };
+    }
+  }
+
+  function fieldErr(id,msg){ const el=$(id), e=el.parentElement.querySelector(".err"); el.setAttribute("aria-invalid",msg?"true":"false"); if(e){ e.textContent=msg||""; e.hidden=!msg; } return !msg; }
+  async function place(){
+    const name=draft.name.trim(), addr=draft.addr.trim();
+    const phone=draft.phone.replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[\s-]/g,"");
+    let ok = fieldErr("cName", name.length<2?"اكتب اسمك عشان المندوب يعرف يسأل عليك.":"");
+    ok = fieldErr("cPhone", /^01[0125]\d{8}$/.test(phone)?"":"الرقم لازم يكون ١١ رقم ويبدأ بـ 010 أو 011 أو 012 أو 015.") && ok;
+    ok = fieldErr("cAddr", addr.length<10?"اكتب العنوان بالتفصيل: المنطقة والشارع ورقم العمارة.":"") && ok;
+    if(!ok){ const f=document.querySelector('#co [aria-invalid="true"]'); if(f) f.focus(); return; }
+    const btn=$("fPlace"); btn.disabled=true; btn.textContent="بنسجّل الطلب…";
+    const errBox=$("coErr"); errBox.hidden=true;
+    const fail = m => { errBox.textContent=m; errBox.hidden=false; btn.disabled=false; btn.textContent="سجّل الطلب"; };
+    if(!API) return fail("الستور لسه مش متوصل بشيت الطلبات. كلمنا نسجّل طلبك.");
+    const body = { name, phone, gov:draft.gov, address:addr, note:(draft.note||"").trim(), items:Object.entries(CART).map(([id,qty])=>({id,qty})), payment:draft.pay||"cod", ref:REF, website:($("cSite")||{}).value||"" };
+    try{
+      const ctl = new AbortController(); const t=setTimeout(()=>ctl.abort(),20000);
+      const res = await fetch(API, { method:"POST", headers:{ "Content-Type":"text/plain;charset=utf-8" }, body:JSON.stringify(body), redirect:"follow", signal:ctl.signal });
+      clearTimeout(t);
+      const data = await res.json();
+      if(!data || !data.ok) return fail((data && data.error) || "مقدرناش نسجّل الطلب. جرّب تاني.");
+      lastOrder = data.order;
+      CART={}; saveCart(); badge(); draft={name:draft.name,phone:draft.phone,gov:draft.gov,addr:draft.addr,pay:draft.pay}; saveDraft();
+      view="done"; render();
+    }catch(e){
+      fail("مقدرناش نوصل للسيرفر. اتأكد إن النت شغال وجرّب تاني.");
+    }
+  }
+
+  // ===== prices and shipping from the sheet =====
+  function applyPrice(){
+    const one = PRODUCTS.find(p=>p.liters===1)||PRODUCTS[0];
+    $("closeAdd").textContent = "أضف " + one.name + " للسلة، " + egp(one.price);
+    cleanCart(); badge(); renderSizes();
+    $("hAdd").disabled = !ACCEPTING; $("closeAdd").disabled = !ACCEPTING;
+    if(!ACCEPTING){ $("hAdd").textContent="الطلبات واقفة مؤقتاً"; }
+    setH(hq); fillShip(); showShip(); render();
+  }
+  async function loadConfig(){
+    if(!API) return;
+    try{
+      const ctl = new AbortController(); const t=setTimeout(()=>ctl.abort(),10000);
+      const res = await fetch(API, { redirect:"follow", signal:ctl.signal }); clearTimeout(t);
+      const c = await res.json();
+      if(!c || !c.ok) return;
+      if(Array.isArray(c.products) && c.products.length) PRODUCTS = c.products.filter(p=>p && p.id && p.price>0).map(p=>({id:String(p.id),name:String(p.name||p.id),liters:Number(p.liters)||0,price:Number(p.price),regular:Number(p.regular)||0}));
+      if(typeof c.offerEnds==="string") OFFER_END = /^\d{4}-\d{2}-\d{2}$/.test(c.offerEnds) ? c.offerEnds : "";
+      if(Array.isArray(c.shipping) && c.shipping.length) SHIP = c.shipping.filter(z=>z && z.gov).map(z=>({gov:String(z.gov),fee:Number(z.fee)||0,days:String(z.days||"")}));
+      if(c.transfer) TRANSFER = c.transfer;
+      ACCEPTING = c.accepting !== false; MAXQ = Number(c.maxQty)||30;
+      applyPrice();
+    }catch(e){ /* الأسعار الافتراضية فاضلة */ }
+  }
+
+  $("cartN").textContent = ar(cartCount());
+  renderSizes(); setH(1); render(); loadConfig();
+})();
+</script>
+
+</body>
+</html>
