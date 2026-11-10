@@ -101,7 +101,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .sizes button small{display:block;font-size:.68rem;color:var(--label-ink-2);font-weight:400}
 .sizes button[aria-checked="true"]{background:var(--label-ink);color:var(--label);border-color:var(--label-ink)}
 .sizes button[aria-checked="true"] small{color:#c9cfb0}
-.sizes .tag{position:absolute;top:-8px;inset-inline-start:6px;background:var(--oil);color:#2a2208;font-size:.6rem;font-weight:700;line-height:1;padding:3px 6px;border-radius:999px}
+.sizes button.soon{opacity:.55;border-style:dashed;cursor:not-allowed}.sizes .tag{position:absolute;top:-8px;inset-inline-start:6px;background:var(--oil);color:#2a2208;font-size:.6rem;font-weight:700;line-height:1;padding:3px 6px;border-radius:999px}
 .label .l-note{font-size:.76rem;line-height:1.45;color:var(--label-ink-2);margin-top:-2px}
 .label .l-note b{color:var(--label-ink);font-weight:600}
 .label .l-note:empty{display:none}
@@ -519,7 +519,7 @@ footer{background:var(--deep);border-top:1px solid rgba(238,240,220,.05)}
     </div>
     <div class="wrap">
       <div>
-        <p class="origin">من شجرنا في العامرية، حصاد أكتوبر ٢٠٢٦</p>
+        <p class="origin">من شجر مزرعتنا، حصاد أكتوبر ٢٠٢٦</p>
         <h1>زيت زيتون<br>من <em>شجرنا</em> لبيتك</h1>
         <p class="lede">بنقطف الزيتون من مزرعة العيلة ونعصره في نفس الموسم. بيوصلك لحد باب البيت في أي محافظة.</p>
         <div class="hero-cta">
@@ -717,7 +717,7 @@ footer{background:var(--deep);border-top:1px solid rgba(238,240,220,.05)}
   let PRODUCTS = [{id:"5l",name:"٥ لتر (جركن)",liters:5,price:2100,regular:2400},{id:"3l",name:"٣ لتر (جركن)",liters:3,price:1290,regular:1440},{id:"1l",name:"١ لتر",liters:1,price:440,regular:500},{id:"750ml",name:"٣/٤ لتر",liters:0.75,price:340,regular:390},{id:"500ml",name:"نص لتر",liters:0.5,price:230,regular:260}];
   // آخر يوم في سعر الافتتاح (من تاب الإعدادات). بعده الشيت بيرجع السعر العادي لوحده
   let OFFER_END = "2026-11-30";
-  const prod = id => PRODUCTS.find(p=>p.id===id);
+  let SOON = PRODUCTS.filter(p=>p.id!=="1l").map(p=>({...p,soon:true})); PRODUCTS = PRODUCTS.filter(p=>p.id==="1l"); const prod = id => PRODUCTS.find(p=>p.id===id);
   let SEL = "1l";
   let TRANSFER = { vodafone:"", instapay:"" };
   let ACCEPTING = true, MAXQ = 30;
@@ -790,11 +790,11 @@ footer{background:var(--deep);border-top:1px solid rgba(238,240,220,.05)}
   function setH(n){ if(SEL===CUSTOM) return setCustom(n); $("hPlus").disabled=false; $("hAdd").disabled=!ACCEPTING; const p=prod(SEL)||PRODUCTS[0]; hq=Math.max(1,Math.min(MAXQ,n)); $("hQty").textContent=ar(hq); $("hSum").textContent = units(hq,p)+" "+short(p)+"، "+egp(hq*p.price); $("hMinus").disabled = hq<=1; $("lPrice").textContent=ar(p.price); $("lVol").textContent=short(p); $("lNote").innerHTML=noteFor(p); if(window.__bottle3d) window.__bottle3d.setSize(p.liters,short(p)); }
   function renderSizes(){
     if(!prod(SEL) && SEL!==CUSTOM) SEL = (PRODUCTS.find(p=>p.liters===1)||PRODUCTS[0]||{}).id;
-    $("sizes").hidden = PRODUCTS.length<2;
+    $("sizes").hidden = PRODUCTS.length+SOON.length<2;
     const perL = PRODUCTS.filter(p=>p.liters>0).map(p=>p.price/p.liters), best = Math.min(...perL);
     const bestId = PRODUCTS.length>2 ? (PRODUCTS.find(p=>p.liters>1 && p.price/p.liters===best)||{}).id : null;
     $("sizes").innerHTML = PRODUCTS.map(p=>`<button type="button" role="radio" aria-checked="${p.id===SEL}" data-id="${esc(p.id)}">${p.id===bestId?'<span class="tag">الأوفر</span>':''}${esc(short(p))}<small class="num">${ar(p.price)} ج</small></button>`).join("")
-      + `<button type="button" role="radio" aria-checked="${SEL===CUSTOM}" data-id="${CUSTOM}">حجم تاني<small>اكتب اللترات</small></button>`;
+      + SOON.map(p=>`<button type="button" class="soon" disabled>${esc(short(p))}<small>قريباً</small></button>`).join("") + (PRODUCTS.length<2 ? "" : `<button type="button" role="radio" aria-checked="${SEL===CUSTOM}" data-id="${CUSTOM}">حجم تاني<small>اكتب اللترات</small></button>`);
     $("sizes").querySelectorAll("button").forEach(b=>b.onclick=()=>{ const was=SEL; SEL=b.dataset.id; renderSizes(); setH(SEL===CUSTOM && was!==CUSTOM ? 8 : was===CUSTOM && SEL!==CUSTOM ? 1 : hq); setStepLabels(); if(window.__syncBar) window.__syncBar(); });
   }
   function setStepLabels(){ const c=SEL===CUSTOM; $("hPlus").setAttribute("aria-label", c?"زوّد لتر":"زوّد زجاجة"); $("hMinus").setAttribute("aria-label", c?"قلّل لتر":"قلّل زجاجة"); $("hQty").title = c ? "لتر" : ""; $("hQty").classList.toggle("is-l", c); $("hQty").hidden=c; $("hLit").hidden=!c;
@@ -1127,7 +1127,7 @@ footer{background:var(--deep);border-top:1px solid rgba(238,240,220,.05)}
       const res = await fetch(API, { redirect:"follow", signal:ctl.signal }); clearTimeout(t);
       const c = await res.json();
       if(!c || !c.ok) return;
-      if(Array.isArray(c.products) && c.products.length) PRODUCTS = c.products.filter(p=>p && p.id && p.price>0).map(p=>({id:String(p.id),name:String(p.name||p.id),liters:Number(p.liters)||0,price:Number(p.price),regular:Number(p.regular)||0})).sort((a,b)=>b.liters-a.liters);
+      if(Array.isArray(c.products) && c.products.length) PRODUCTS = c.products.filter(p=>p && p.id && (p.price>0 || p.soon)).map(p=>({id:String(p.id),name:String(p.name||p.id),liters:Number(p.liters)||0,price:Number(p.price),regular:Number(p.regular)||0,soon:!!p.soon})).sort((a,b)=>b.liters-a.liters); SOON=PRODUCTS.filter(p=>p.soon); PRODUCTS=PRODUCTS.filter(p=>!p.soon);
       if(typeof c.offerEnds==="string") OFFER_END = /^\d{4}-\d{2}-\d{2}$/.test(c.offerEnds) ? c.offerEnds : "";
       if(Array.isArray(c.shipping) && c.shipping.length) SHIP = c.shipping.filter(z=>z && z.gov).map(z=>({gov:String(z.gov),fee:Number(z.fee)||0,days:String(z.days||"")}));
       if(c.transfer) TRANSFER = c.transfer;
