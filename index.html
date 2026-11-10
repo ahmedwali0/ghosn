@@ -1127,7 +1127,7 @@ footer{background:var(--deep);border-top:1px solid rgba(238,240,220,.05)}
       const res = await fetch(API, { redirect:"follow", signal:ctl.signal }); clearTimeout(t);
       const c = await res.json();
       if(!c || !c.ok) return;
-      if(Array.isArray(c.products) && c.products.length) PRODUCTS = c.products.filter(p=>p && p.id && p.price>0).map(p=>({id:String(p.id),name:String(p.name||p.id),liters:Number(p.liters)||0,price:Number(p.price),regular:Number(p.regular)||0}));
+      if(Array.isArray(c.products) && c.products.length) PRODUCTS = c.products.filter(p=>p && p.id && p.price>0).map(p=>({id:String(p.id),name:String(p.name||p.id),liters:Number(p.liters)||0,price:Number(p.price),regular:Number(p.regular)||0})).sort((a,b)=>b.liters-a.liters);
       if(typeof c.offerEnds==="string") OFFER_END = /^\d{4}-\d{2}-\d{2}$/.test(c.offerEnds) ? c.offerEnds : "";
       if(Array.isArray(c.shipping) && c.shipping.length) SHIP = c.shipping.filter(z=>z && z.gov).map(z=>({gov:String(z.gov),fee:Number(z.fee)||0,days:String(z.days||"")}));
       if(c.transfer) TRANSFER = c.transfer;
